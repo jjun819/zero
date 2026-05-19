@@ -1,35 +1,55 @@
 import { ArrowRight } from "lucide-react";
-import heroVideo from "@/assets/hero-bg.mp4";
-
-const APPLY_HREF = "mailto:Zerocostapplication@foreseeson.com";
 
 export function Hero() {
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden bg-black text-white"
-    >
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        src={heroVideo}
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+    <section className="relative overflow-hidden bg-black text-white">
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.8) 100%)",
+            "linear-gradient(135deg, #1a4d3e 0%, #0f2f28 50%, #1a4d3e 100%)",
         }}
       />
-      <div className="relative mx-auto flex min-h-[80vh] max-w-7xl flex-col justify-center px-5 py-20 md:px-8">
-        <h1 className="max-w-5xl text-3xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl">
-          Turn your property into a new revenue stream.
-        </h1>
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 20% 50%, #04BBA6 1px, transparent 1px), radial-gradient(circle at 80% 80%, #1EDDC7 1px, transparent 1px), radial-gradient(circle at 40% 20%, #2D865B 1px, transparent 1px)",
+          backgroundSize: "200px 200px",
+        }}
+      />
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
+      <div className="relative mx-auto flex min-h-[80vh] max-w-7xl flex-col justify-center px-5 py-20 md:px-8">
+        <div className="max-w-3xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
+            The zero-cost program
+          </div>
+
+          <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-6xl lg:text-7xl">
+            EV charging.{" "}
+            <span
+              style={{
+                background:
+                  "linear-gradient(to right, #6ee7b7, #1eddc7)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Zero cost.
+            </span>{" "}
+            Monthly revenue.
+          </h1>
+
+          <p className="mt-6 max-w-xl text-lg text-white/70">
+            UbiqPower handles design, equipment, and installation at no upfront
+            cost. You provide EV-ready stalls and electrical capacity. Property
+            owners earn 10% of monthly charging revenue.
+          </p>
+        </div>
+
+        <div className="mt-10 flex flex-wrap items-center gap-3">
           <a
             href="#apply"
             className="inline-flex h-12 items-center gap-2 rounded-md bg-white px-6 text-sm font-semibold text-black shadow-lg shadow-black/30 transition-colors hover:bg-white/90"

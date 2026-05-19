@@ -5,6 +5,7 @@ const products = [
   {
     name: "L2 EV Charger",
     image: productL2,
+    href: "/products/l2-ev-charger",
     points: [
       "Ideal for residential, commercial, and workplace charging.",
       "Reliable everyday charging for longer parking durations.",
@@ -13,6 +14,7 @@ const products = [
   {
     name: "L3 DC Fast EV Charger",
     image: productL3,
+    href: "/products/l3-fast-dc-ev-charger",
     points: [
       "High-speed charging designed for public and high-traffic locations.",
       "Helps support faster turnover for EV drivers.",
@@ -62,6 +64,12 @@ export function Products() {
                     </li>
                   ))}
                 </ul>
+                <a
+                  href={p.href}
+                  className="mt-5 inline-flex h-10 items-center rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Learn More
+                </a>
               </div>
             </div>
           ))}

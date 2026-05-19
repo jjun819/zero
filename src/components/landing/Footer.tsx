@@ -36,8 +36,8 @@ export function Footer() {
             </h4>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
-                <a href="#overview" className="text-white/80 hover:text-[#1EDDC7]">
-                  Overview
+                <a href="#Products" className="text-white/80 hover:text-[#1EDDC7]">
+                  Products
                 </a>
               </li>
               <li>

@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsL3FastDcEvChargerRouteImport } from './routes/products/l3-fast-dc-ev-charger'
+import { Route as ProductsL2EvChargerRouteImport } from './routes/products/l2-ev-charger'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicSubmitApplicationRouteImport } from './routes/api/public/submit-application'
@@ -26,6 +28,17 @@ const UnsubscribeRoute = UnsubscribeRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsL3FastDcEvChargerRoute =
+  ProductsL3FastDcEvChargerRouteImport.update({
+    id: '/products/l3-fast-dc-ev-charger',
+    path: '/products/l3-fast-dc-ev-charger',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ProductsL2EvChargerRoute = ProductsL2EvChargerRouteImport.update({
+  id: '/products/l2-ev-charger',
+  path: '/products/l2-ev-charger',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
@@ -67,6 +80,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
+  '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
   '/api/public/submit-application': typeof ApiPublicSubmitApplicationRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -77,6 +92,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
+  '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
   '/api/public/submit-application': typeof ApiPublicSubmitApplicationRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -88,6 +105,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
+  '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
   '/api/public/submit-application': typeof ApiPublicSubmitApplicationRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -100,6 +119,8 @@ export interface FileRouteTypes {
     | '/'
     | '/unsubscribe'
     | '/email/unsubscribe'
+    | '/products/l2-ev-charger'
+    | '/products/l3-fast-dc-ev-charger'
     | '/api/public/submit-application'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
@@ -110,6 +131,8 @@ export interface FileRouteTypes {
     | '/'
     | '/unsubscribe'
     | '/email/unsubscribe'
+    | '/products/l2-ev-charger'
+    | '/products/l3-fast-dc-ev-charger'
     | '/api/public/submit-application'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
@@ -120,6 +143,8 @@ export interface FileRouteTypes {
     | '/'
     | '/unsubscribe'
     | '/email/unsubscribe'
+    | '/products/l2-ev-charger'
+    | '/products/l3-fast-dc-ev-charger'
     | '/api/public/submit-application'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
@@ -131,6 +156,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  ProductsL2EvChargerRoute: typeof ProductsL2EvChargerRoute
+  ProductsL3FastDcEvChargerRoute: typeof ProductsL3FastDcEvChargerRoute
   ApiPublicSubmitApplicationRoute: typeof ApiPublicSubmitApplicationRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -152,6 +179,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/l3-fast-dc-ev-charger': {
+      id: '/products/l3-fast-dc-ev-charger'
+      path: '/products/l3-fast-dc-ev-charger'
+      fullPath: '/products/l3-fast-dc-ev-charger'
+      preLoaderRoute: typeof ProductsL3FastDcEvChargerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/l2-ev-charger': {
+      id: '/products/l2-ev-charger'
+      path: '/products/l2-ev-charger'
+      fullPath: '/products/l2-ev-charger'
+      preLoaderRoute: typeof ProductsL2EvChargerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/email/unsubscribe': {
@@ -203,6 +244,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  ProductsL2EvChargerRoute: ProductsL2EvChargerRoute,
+  ProductsL3FastDcEvChargerRoute: ProductsL3FastDcEvChargerRoute,
   ApiPublicSubmitApplicationRoute: ApiPublicSubmitApplicationRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,

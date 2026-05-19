@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-bright: var(--brand-accent-bright);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-soft: var(--brand-soft);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Brand palette in oklch */
+  --background: oklch(0.992 0.003 250);              /* #FAFCFD */
+  --foreground: oklch(0.18 0.018 268);               /* #12141A */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.018 268);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.018 268);
+
+  --primary: oklch(0.55 0.118 156);                  /* #2D865B Sea Green */
+  --primary-foreground: oklch(0.992 0.003 250);
+
+  --secondary: oklch(0.972 0.012 268);               /* #EFF2FB */
+  --secondary-foreground: oklch(0.18 0.018 268);
+
+  --muted: oklch(0.93 0.018 268);                    /* #DBDFED */
+  --muted-foreground: oklch(0.46 0.026 268);         /* #545B77 */
+
+  --accent: oklch(0.63 0.135 156);                   /* #39A770 Light Sea Green */
+  --accent-foreground: oklch(0.992 0.003 250);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.992 0.003 250);
+
+  --border: oklch(0.93 0.018 268);
+  --input: oklch(0.93 0.018 268);
+  --ring: oklch(0.55 0.118 156);
+
+  /* Brand-specific tokens */
+  --brand-dark: oklch(0.18 0.018 268);               /* #12141A Chinese Black */
+  --brand-accent: oklch(0.72 0.155 178);             /* #04BBA6 */
+  --brand-accent-bright: oklch(0.84 0.18 178);       /* #1EDDC7 */
+  --brand-surface: oklch(0.972 0.012 268);           /* #EFF2FB Cornflower */
+  --brand-soft: oklch(0.93 0.018 268);               /* #DBDFED Icelandic Winds */
+
+  --gradient-sea: linear-gradient(135deg, #2D865B 0%, #04BBA6 100%);
+  --gradient-sea-soft: linear-gradient(135deg, #2D865B33 0%, #04BBA61a 100%);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  section {
+    scroll-margin-top: 5rem;
+  }
+}

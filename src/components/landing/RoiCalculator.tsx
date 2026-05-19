@@ -37,7 +37,7 @@ export function RoiCalculator() {
             Revenue estimate
           </div>
           <h2 className="text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
-            Estimate your monthly charger revenue
+            Estimate your monthly revenue
           </h2>
           <p className="mt-4 text-base leading-relaxed text-neutral-600 md:text-lg">
             Move the bar to estimate the monthly property share based on the

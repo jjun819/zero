@@ -28,7 +28,7 @@ export function Products() {
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="mb-12 max-w-3xl">
           <h2 className="text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
-            Products
+            Prescriptive Solutions
           </h2>
           <p className="mt-4 text-base text-neutral-600 md:text-lg">
             Charging solutions designed for every property type — from everyday

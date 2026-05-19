@@ -49,13 +49,13 @@ function Index() {
         <Divider />
         <HowItWorks />
         <Divider />
-        <Qualifications />
+        <RoiCalculator />
         <Divider />
         <Products />
         <Divider />
-        <RoiCalculator />
-        <Divider />
         <Application />
+        <Divider />
+        <Qualifications />
         <Divider />
         <FAQ />
       </main>

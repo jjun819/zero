@@ -1,78 +1,136 @@
-import productL2 from "@/assets/product-l2.png";
-import productL3 from "@/assets/product-l3.png";
+import { CheckCircle2 } from "lucide-react";
+import l2ChargerImage from "@/assets/l2charger.webp";
+import l3ChargerImage from "@/assets/ev_charger.png";
 
-const products = [
-  {
-    name: "L2 EV Charger",
-    image: productL2,
+const PRODUCTS = {
+  l2: {
+    badge: "L2",
+    label: "Everyday charging",
+    name: "Level 2 EV Charger",
+    image: l2ChargerImage,
+    imageAlt: "Level 2 EV charger",
     href: "/products/l2-ev-charger",
-    points: [
-      "Ideal for residential, commercial, and workplace charging.",
-      "Reliable everyday charging for longer parking durations.",
+    description:
+      "Ideal for residential, commercial, and workplace charging. 8-12 hour sessions, perfect for overnight or workday parking.",
+    specs: [
+      "7.2-19.2 kW output",
+      "OCPP 1.6 compatible",
+      "Networked + local billing",
     ],
   },
-  {
-    name: "L3 DC Fast EV Charger",
-    image: productL3,
+  l3: {
+    badge: "L3",
+    label: "Fast charging",
+    name: "Level 3 DC Fast Charger",
+    image: l3ChargerImage,
+    imageAlt: "Level 3 DC fast charger",
     href: "/products/l3-fast-dc-ev-charger",
-    points: [
-      "High-speed charging designed for public and high-traffic locations.",
-      "Helps support faster turnover for EV drivers.",
+    description:
+      "High-speed charging for public and high-traffic locations. 20-45 minute sessions, ideal for retail plazas and highway corridors.",
+    specs: [
+      "50-150 kW output",
+      "CCS + CHAdeMO connectors",
+      "Premium revenue per session",
     ],
   },
-];
+};
+
+function SpecItem({ text }: { text: string }) {
+  return (
+    <li className="flex items-start gap-2.5">
+      <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#2D865B]" />
+      <span className="text-sm text-neutral-600">{text}</span>
+    </li>
+  );
+}
+
+function ProductCard({
+  product,
+}: {
+  product: (typeof PRODUCTS)[keyof typeof PRODUCTS];
+}) {
+  const isBadgeEmerald = product.badge === "L2";
+  const badgeBg = isBadgeEmerald ? "#ECFDF5" : "#EFF6FF";
+  const badgeText = isBadgeEmerald ? "#065F46" : "#1E40AF";
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-neutral-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <div className="relative flex aspect-video items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200 px-4 text-center">
+        <img
+          src={product.image}
+          alt={product.imageAlt}
+          className="absolute inset-0 h-full w-full object-contain p-6"
+        />
+      </div>
+
+      <div className="p-6 md:p-7">
+        <div className="mb-3 flex items-center gap-2">
+          <span
+            className="inline-block rounded px-2.5 py-1 text-xs font-semibold uppercase tracking-wider"
+            style={{ background: badgeBg, color: badgeText, borderRadius: 6 }}
+          >
+            {product.badge}
+          </span>
+          <span className="text-xs font-medium uppercase tracking-wide text-neutral-500">
+            {product.label}
+          </span>
+        </div>
+
+        <h3 className="mb-2 text-xl font-semibold leading-tight text-neutral-900 md:text-2xl">
+          {product.name}
+        </h3>
+
+        <p className="mb-4 text-sm leading-relaxed text-neutral-600">
+          {product.description}
+        </p>
+
+        <ul className="mb-6 space-y-2">
+          {product.specs.map((spec) => (
+            <SpecItem key={spec} text={spec} />
+          ))}
+        </ul>
+
+        <a
+          href={product.href}
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[#2D865B] transition-colors hover:text-[#1EDDC7]"
+        >
+          Learn more
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path
+              d="M2 7h10M8 3l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export function Products() {
   return (
-    <section id="products" className="bg-white py-20 md:py-24">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+    <section id="products" className="bg-white py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="mb-12 max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
-            Prescriptive Solutions
+          <div className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2D865B]">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#2D865B]" />
+            Products
+          </div>
+          <h2 className="mb-2 text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
+            Everything you need to go live.
           </h2>
-          <p className="mt-4 text-base text-neutral-600 md:text-lg">
-            Charging solutions designed for every property type — from everyday
-            residential use to high-traffic public locations.
+          <p className="text-base leading-relaxed text-neutral-600 md:text-lg">
+            From L2 chargers for daily use to L3 fast DC for high-traffic
+            properties, choose the hardware that fits your charging needs.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {products.map((p) => (
-            <div
-              key={p.name}
-              className="flex items-center gap-6 rounded-2xl border border-neutral-300 bg-white p-6 shadow-sm md:p-8"
-            >
-              <div className="flex h-36 w-36 shrink-0 items-center justify-center rounded-xl bg-neutral-50 md:h-44 md:w-44">
-                <img
-                  src={p.image}
-                  alt={p.name}
-                  className="max-h-full max-w-full object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <div className="min-w-0">
-                <h3 className="text-lg font-semibold text-neutral-900 md:text-xl">
-                  {p.name}
-                </h3>
-                <ul className="mt-3 space-y-2">
-                  {p.points.map((pt) => (
-                    <li
-                      key={pt}
-                      className="text-sm leading-relaxed text-neutral-600"
-                    >
-                      • {pt}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href={p.href}
-                  className="mt-5 inline-flex h-10 items-center rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  Learn More
-                </a>
-              </div>
-            </div>
-          ))}
+        <div className="grid gap-5 lg:grid-cols-2">
+          <ProductCard product={PRODUCTS.l2} />
+          <ProductCard product={PRODUCTS.l3} />
         </div>
       </div>
     </section>

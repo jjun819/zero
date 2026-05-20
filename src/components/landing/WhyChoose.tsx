@@ -1,5 +1,5 @@
 const CheckIcon = () => (
-  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-brand shrink-0 mt-0.5">
+  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-primary shrink-0 mt-0.5">
     <circle cx="32" cy="32" r="22" />
     <path d="M22 32l8 8 14-16" />
   </svg>
@@ -64,15 +64,15 @@ export function WhyChoose() {
             {/* Right side - bullets */}
             <div className="flex-1 border-l border-black/10 pl-6 flex flex-col justify-between py-2">
               <ul className="space-y-3">
-                <li className="flex items-start gap-2.5 text-[13px] text-muted-foreground">
+                <li className="flex items-start gap-2.5 text-sm leading-relaxed text-muted-foreground md:text-base">
                   <CheckIcon />
                   <span>Design included</span>
                 </li>
-                <li className="flex items-start gap-2.5 text-[13px] text-muted-foreground">
+                <li className="flex items-start gap-2.5 text-sm leading-relaxed text-muted-foreground md:text-base">
                   <CheckIcon />
                   <span>Equipment included</span>
                 </li>
-                <li className="flex items-start gap-2.5 text-[13px] text-muted-foreground">
+                <li className="flex items-start gap-2.5 text-sm leading-relaxed text-muted-foreground md:text-base">
                   <CheckIcon />
                   <span>Installation included</span>
                 </li>
@@ -97,15 +97,15 @@ export function WhyChoose() {
             {/* Right side - bullets */}
             <div className="flex-1 border-l border-white/15 pl-6 flex flex-col justify-between py-2">
               <ul className="space-y-3">
-                <li className="flex items-start gap-2.5 text-[13px] text-white/75">
+                <li className="flex items-start gap-2.5 text-sm leading-relaxed text-white/80 md:text-base">
                   <CheckIcon />
                   <span>Of monthly net profit</span>
                 </li>
-                <li className="flex items-start gap-2.5 text-[13px] text-white/75">
+                <li className="flex items-start gap-2.5 text-sm leading-relaxed text-white/80 md:text-base">
                   <CheckIcon />
                   <span>Paid automatically every month</span>
                 </li>
-                <li className="flex items-start gap-2.5 text-[13px] text-white/75">
+                <li className="flex items-start gap-2.5 text-sm leading-relaxed text-white/80 md:text-base">
                   <CheckIcon />
                   <span>No minimum session requirement</span>
                 </li>

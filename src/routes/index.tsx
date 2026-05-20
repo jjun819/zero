@@ -49,9 +49,9 @@ function Index() {
         <Divider />
         <HowItWorks />
         <Divider />
-        <RoiCalculator />
-        <Divider />
         <Products />
+        <Divider />
+        <RoiCalculator />
         <Divider />
         <Application />
         <Divider />

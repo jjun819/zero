@@ -1,9 +1,6 @@
+import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { lazy, Suspense, useEffect, useState } from "react";
-
-const MapBackground = lazy(() =>
-  import("./MapBackground").then((m) => ({ default: m.MapBackground }))
-);
+import heroEvCharging from "@/assets/hero-ev-charging.jpg";
 
 export function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,48 +10,11 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-black text-white">
-      {/* Map background — lazy-loaded to avoid SSR window errors */}
-      <div className="absolute inset-0 z-0">
-        {isVisible && (
-          <Suspense fallback={null}>
-            <MapBackground />
-          </Suspense>
-        )}
-
-        {/* Darkening overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(15, 47, 40, 0.58) 0%, rgba(10, 26, 31, 0.68) 50%, rgba(15, 47, 40, 0.58) 100%)",
-          }}
-        />
-
-        {/* Dark vignette on edges */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%)",
-          }}
-        />
-      </div>
-
-      {/* Strong gradient overlay on left side for text readability */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%)",
-        }}
-      />
-
-      {/* Content */}
-      <div className="relative z-20 mx-auto flex min-h-[80vh] max-w-7xl flex-col justify-center px-5 py-20 md:px-8">
+    <section className="relative overflow-hidden bg-[#F8FAFC]">
+      <div className="mx-auto grid min-h-[80vh] max-w-7xl items-center gap-12 px-5 py-20 md:px-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)] lg:gap-16">
         <div className="max-w-3xl">
           <h1
-            className={`max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-6xl lg:text-7xl transition-all duration-1000 ${
+            className={`max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight text-slate-950 transition-all duration-1000 md:text-6xl lg:text-7xl ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "200ms" }}
@@ -63,7 +23,7 @@ export function Hero() {
             <span
               className="inline-block"
               style={{
-                background: "linear-gradient(to right, #6ee7b7, #1eddc7, #6ee7b7)",
+                background: "linear-gradient(to right, #2D865B, #0f766e, #1EDDC7)",
                 backgroundSize: "200% 200%",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -73,11 +33,11 @@ export function Hero() {
             >
               Zero cost.
             </span>{" "}
-            Monthly revenue.
+            
           </h1>
 
           <p
-            className={`mt-6 max-w-xl text-lg text-white/70 transition-all duration-1000 ${
+            className={`mt-6 max-w-xl text-lg leading-relaxed text-slate-600 transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "400ms" }}
@@ -95,19 +55,36 @@ export function Hero() {
           >
             <a
               href="#apply"
-              className="group relative inline-flex h-12 items-center gap-2 rounded-md bg-white px-6 text-sm font-semibold text-black overflow-hidden shadow-lg shadow-black/30 transition-all hover:shadow-xl hover:shadow-emerald-500/20 hover:scale-105"
+              className="group relative inline-flex h-12 items-center gap-2 overflow-hidden rounded-md bg-[#2D865B] px-6 text-sm font-semibold text-white shadow-lg shadow-emerald-900/15 transition-all hover:scale-105 hover:bg-[#24724d] hover:shadow-xl hover:shadow-emerald-900/20"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Apply Now <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                Apply Now{" "}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-500" />
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 transition-all duration-500 group-hover:translate-x-full group-hover:opacity-20" />
             </a>
             <a
               href="#how-it-works"
-              className="group inline-flex h-12 items-center rounded-md border border-white/40 bg-white/5 px-6 text-sm font-semibold text-white backdrop-blur transition-all hover:border-emerald-400/60 hover:bg-white/10"
+              className="group inline-flex h-12 items-center rounded-md border border-slate-300 bg-white px-6 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:border-[#2D865B]/50 hover:text-[#2D865B] hover:shadow-md"
             >
               Learn How It Works
             </a>
+          </div>
+        </div>
+
+        <div
+          className={`relative transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{ transitionDelay: "500ms" }}
+        >
+          <div className="relative overflow-hidden rounded-2xl shadow-2xl shadow-slate-900/12">
+            <img
+              src={heroEvCharging}
+              alt="Electric vehicle charging at a commercial property"
+              className="h-[360px] w-full object-cover md:h-[480px] lg:h-[560px]"
+              loading="eager"
+            />
           </div>
         </div>
       </div>
@@ -117,18 +94,6 @@ export function Hero() {
           0% { background-position: 0% center; }
           50% { background-position: 100% center; }
           100% { background-position: 0% center; }
-        }
-
-        .leaflet-container {
-          background: #0a1a1f !important;
-        }
-        .leaflet-tile {
-          border: 0 !important;
-          outline: none !important;
-          box-shadow: none !important;
-        }
-        .leaflet-control-attribution {
-          display: none !important;
         }
       `}</style>
     </section>

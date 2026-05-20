@@ -6,7 +6,6 @@ import { WhyChoose } from "@/components/landing/WhyChoose";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Qualifications } from "@/components/landing/Qualifications";
 import { Products } from "@/components/landing/Products";
-import { RoiCalculator } from "@/components/landing/RoiCalculator";
 import { Application } from "@/components/landing/Application";
 import { FAQ } from "@/components/landing/FAQ";
 import { Footer } from "@/components/landing/Footer";
@@ -50,8 +49,6 @@ function Index() {
         <HowItWorks />
         <Divider />
         <Products />
-        <Divider />
-        <RoiCalculator />
         <Divider />
         <Application />
         <Divider />

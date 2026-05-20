@@ -6,7 +6,7 @@ const ArrowIcon = () => (
 
 export function WhyChoose() {
   return (
-    <section id="overview" className="bg-background py-20 md:py-28">
+    <section id="overview" className="bg-[#EFF2FB] py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
 
         {/* ── Section heading (unchanged) ── */}

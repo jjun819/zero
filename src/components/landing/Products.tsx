@@ -113,7 +113,7 @@ function ProductCard({
 export function Products() {
   return (
     <section id="products" className="bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+      <div className="mx-auto max-w-[1380px] px-5 md:px-8">
         <div className="mb-12 max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2D865B]">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#2D865B]" />

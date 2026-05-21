@@ -5,7 +5,7 @@ const APPLY_HREF = "mailto:Zerocostapplication@foreseeson.com";
 export function Footer() {
   return (
     <footer className="bg-[#12141A] text-white">
-      <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
+      <div className="mx-auto max-w-[1380px] px-5 py-16 md:px-8 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className="flex items-center gap-2">

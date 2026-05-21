@@ -103,7 +103,7 @@ export function Application() {
           "linear-gradient(180deg, #2D865B 0%, #5BAA84 35%, #C9E2D5 70%, #FAFCFD 100%)",
       }}
     >
-      <div className="mx-auto max-w-5xl px-6">
+      <div className="mx-auto max-w-[1380px] px-6">
         <div className="mb-10 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">
             Apply for the Zero Cost EV Charger Program

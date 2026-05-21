@@ -11,7 +11,7 @@ const points = [
 export function Qualifications() {
   return (
     <section className="bg-background py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <div className="mx-auto max-w-[1380px] px-5 md:px-8">
         <div className="max-w-3xl">
           <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
             Eligibility

@@ -28,7 +28,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-16 max-w-7xl items-center px-5 pl-6 md:px-8 md:pl-16">
+      <div className="mx-auto flex h-16 max-w-[1380px] items-center px-5 pl-6 md:px-8 md:pl-16">
         <a href="/" className="flex items-center gap-2">
           <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
             <Zap className="h-4 w-4" />
@@ -178,7 +178,7 @@ export function Navbar() {
 
       {open && (
         <div className="border-t border-border bg-background md:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
+          <div className="mx-auto flex max-w-[1380px] flex-col gap-1 px-5 py-4">
             <a
               href="#products"
               onClick={() => setOpen(false)}

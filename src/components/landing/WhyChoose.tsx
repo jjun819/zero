@@ -7,23 +7,15 @@ const ArrowIcon = () => (
 export function WhyChoose() {
   return (
     <section id="overview" className="bg-[#EFF2FB] py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+      <div className="mx-auto max-w-[1380px] px-5 md:px-8">
 
         {/* ── Section heading (unchanged) ── */}
-        <div className="max-w-5xl">
-          <h2 className="text-2xl font-semibold tracking-tight md:text-3xl lg:text-4xl">
+        <div className="max-w-3xl">
+          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
             <span className="text-foreground">A zero-cost program for property owners.</span>{" "}
-            <span className="text-foreground/50">
-              UbiqPower brings EV charging infrastructure without upfront investment,
-              while you earn a monthly net revenue share.
-            </span>
           </h2>
-          <p className="mt-5 text-base text-muted-foreground md:text-lg">
-            UbiqPower Technology Inc. makes it easy for strata corporations,
-            multi-unit residential developers, commercial property owners, and retail
-            property owners to offer turnkey EV charging. With over 11 years of EV
-            charging experience, UbiqPower helps remove the cost and complexity of
-            getting started.
+          <p className="mt-5 text-base text-foreground md:text-lg">
+            UbiqPower delivers turnkey EV charging solutions at Zero upfront cost, turning parking spaces into monthly net profit for strata corporations, commercial, and retail property owners
           </p>
         </div>
 
@@ -51,7 +43,7 @@ export function WhyChoose() {
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
                 Your monthly share
               </p>
-              <p className="mt-3 text-[110px] font-semibold leading-none tracking-tight text-primary md:text-[130px]">
+              <p className="mt-3 text-[110px] font-semibold leading-none tracking-tight text-foreground md:text-[130px]">
                 10%
               </p>
               <p className="mt-5 max-w-sm text-base leading-relaxed text-muted-foreground">

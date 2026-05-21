@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import heroEvCharging from "@/assets/hero-ev-charging.jpg";
+import heroChargerBackground from "@/assets/hero-charger-background.jpg";
 
 export function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,18 +10,23 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-[#F8FAFC]">
-      <div className="mx-auto grid min-h-[80vh] max-w-7xl items-center gap-12 px-5 py-20 md:px-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)] lg:gap-16">
+    <section
+      className="relative overflow-hidden bg-[#F8FAFC] bg-cover bg-[70%_center] md:bg-center"
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(248, 250, 252, 0.96) 0%, rgba(248, 250, 252, 0.78) 36%, rgba(248, 250, 252, 0.18) 72%), url(${heroChargerBackground})`,
+      }}
+    >
+      <div className="mx-auto flex min-h-[80vh] max-w-7xl items-center px-5 py-20 md:px-8">
         <div className="max-w-3xl">
           <h1
-            className={`max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight text-slate-950 transition-all duration-1000 md:text-6xl lg:text-7xl ${
+            className={`max-w-[44rem] text-[2.25rem] font-semibold leading-[1.1] tracking-tight text-slate-950 transition-all duration-1000 md:text-[3.25rem] lg:text-[4.3rem] ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            EV charging.{" "}
+            Effortless EV charging, now with{" "}
             <span
-              className="inline-block"
+              className="inline"
               style={{
                 background: "linear-gradient(to right, #2D865B, #0f766e, #1EDDC7)",
                 backgroundSize: "200% 200%",
@@ -31,24 +36,27 @@ export function Hero() {
                 animation: "gradientFlow 4s ease infinite",
               }}
             >
-              Zero cost.
+              Zero Cost.
             </span>{" "}
             
           </h1>
 
           <p
-            className={`mt-6 max-w-xl text-lg leading-relaxed text-slate-600 transition-all duration-1000 ${
+            className={`mt-5 text-[1rem] leading-relaxed text-slate-950 transition-all duration-1000 md:text-[1.125rem] lg:text-[1.27rem] ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            UbiqPower handles design, equipment, and installation at no upfront
-            cost. You provide EV-ready stalls and electrical capacity. Property
-            owners earn 10% of monthly charging revenue.
+            <span className="block max-w-[33rem]">
+              UbiqPower handles everything from design to installation,
+            </span>
+            <span className="block max-w-[29rem]">
+              so your property can offer modern EV charging without any upfront investment.
+            </span>
           </p>
 
           <div
-            className={`mt-10 flex flex-wrap items-center gap-3 transition-all duration-1000 ${
+            className={`mt-10 flex flex-wrap items-center gap-8 transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "600ms" }}
@@ -72,21 +80,6 @@ export function Hero() {
           </div>
         </div>
 
-        <div
-          className={`relative transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-          style={{ transitionDelay: "500ms" }}
-        >
-          <div className="relative overflow-hidden rounded-2xl shadow-2xl shadow-slate-900/12">
-            <img
-              src={heroEvCharging}
-              alt="Electric vehicle charging at a commercial property"
-              className="h-[360px] w-full object-cover md:h-[480px] lg:h-[560px]"
-              loading="eager"
-            />
-          </div>
-        </div>
       </div>
 
       <style>{`

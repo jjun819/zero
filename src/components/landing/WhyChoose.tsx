@@ -1,8 +1,64 @@
+import { useEffect, useRef, useState } from "react";
+
 const ArrowIcon = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
     <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
+
+const CountUpPercent = ({ value }: { value: number }) => {
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setDisplayValue(value);
+      return;
+    }
+
+    let animationFrameId = 0;
+    let startTime = 0;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+
+      const progress = Math.min((timestamp - startTime) / 1600, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setDisplayValue(Math.round(easedProgress * value));
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        animationFrameId = requestAnimationFrame(animate);
+        observer.disconnect();
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.35,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [value]);
+
+  return <span ref={ref}>{displayValue}%</span>;
+};
 
 export function WhyChoose() {
   return (
@@ -20,15 +76,15 @@ export function WhyChoose() {
         </div>
 
         {/* ── Two numbers, let them breathe ── */}
-        <div className="mt-14 border-t border-foreground">
-          <div className="grid grid-cols-1 divide-y divide-neutral-300 md:grid-cols-2 md:divide-x md:divide-y-0">
+        <div className="mt-14">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
 
             {/* $0 */}
-            <div className="py-10 pr-0 md:pr-14">
+            <div className="rounded-xl border border-black/20 bg-white/70 p-7 shadow-[0_16px_45px_rgba(15,23,42,0.06)] md:p-9">
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
                 Your investment
               </p>
-              <p className="mt-3 text-[110px] font-semibold leading-none tracking-tight text-foreground md:text-[130px]">
+              <p className="mt-3 text-[110px] font-semibold leading-none tracking-tight text-primary md:text-[130px]">
                 $0
               </p>
               <p className="mt-5 max-w-sm text-base leading-relaxed text-muted-foreground">
@@ -39,12 +95,12 @@ export function WhyChoose() {
             </div>
 
             {/* 10% */}
-            <div className="py-10 pl-0 md:pl-14">
+            <div className="rounded-xl border border-black/20 bg-white/70 p-7 shadow-[0_16px_45px_rgba(15,23,42,0.06)] md:p-9">
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
                 Your monthly share
               </p>
-              <p className="mt-3 text-[110px] font-semibold leading-none tracking-tight text-foreground md:text-[130px]">
-                10%
+              <p className="mt-3 text-[110px] font-semibold leading-none tracking-tight text-primary md:text-[130px]">
+                <CountUpPercent value={10} />
               </p>
               <p className="mt-5 max-w-sm text-base leading-relaxed text-muted-foreground">
                 Ten percent of monthly net profit is paid automatically to the
@@ -56,7 +112,7 @@ export function WhyChoose() {
         </div>
 
         {/* ── What's included ── */}
-        <div className="mt-0 border-t border-border">
+        <div className="mx-auto mt-6 max-w-5xl">
           <div className="grid grid-cols-1 divide-y divide-border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {[
               { heading: "Design included",       sub: "Site survey + engineering plan" },
@@ -82,7 +138,7 @@ export function WhyChoose() {
             href="#apply"
             className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
           >
-            See if you qualify <ArrowIcon />
+            Check Eligibility <ArrowIcon />
           </a>
         </div>
 

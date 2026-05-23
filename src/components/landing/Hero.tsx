@@ -16,7 +16,7 @@ export function Hero() {
         backgroundImage: `linear-gradient(to right, rgba(248, 250, 252, 0.96) 0%, rgba(248, 250, 252, 0.78) 36%, rgba(248, 250, 252, 0.18) 72%), url(${heroChargerBackground})`,
       }}
     >
-      <div className="mx-auto flex min-h-[80vh] max-w-7xl items-center px-5 py-20 md:px-8">
+      <div className="mx-auto flex min-h-[90vh] max-w-7xl items-center px-5 py-24 md:px-8 md:py-28">
         <div className="max-w-3xl">
           <h1
             className={`max-w-[44rem] text-[2.25rem] font-semibold leading-[1.1] tracking-tight text-slate-950 transition-all duration-1000 md:text-[3.25rem] lg:text-[4.3rem] ${

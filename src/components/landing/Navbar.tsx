@@ -158,7 +158,13 @@ export function Navbar() {
           </div>
         </nav>
 
-        <div className="ml-8 hidden md:block">
+        <div className="ml-8 hidden items-center gap-3 md:flex">
+          <button
+            type="button"
+            className="inline-flex h-10 items-center rounded-md border border-border bg-background px-5 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-secondary"
+          >
+            Contact Us
+          </button>
           <a
             href={APPLY_HREF}
             className="inline-flex h-10 items-center rounded-md bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
@@ -272,6 +278,13 @@ export function Navbar() {
             >
               Apply Now
             </a>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="inline-flex h-10 items-center justify-center rounded-md border border-border bg-background px-5 text-sm font-semibold text-foreground"
+            >
+              Contact Us
+            </button>
           </div>
         </div>
       )}

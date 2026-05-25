@@ -3,6 +3,7 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { Test } from "@/components/landing/Test";
 import { WhyChoose } from "@/components/landing/WhyChoose";
+import { Value } from "@/components/landing/Value";
 
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Qualifications } from "@/components/landing/Qualifications";
@@ -47,6 +48,8 @@ function Index() {
         <Test />
         <Divider />
         <WhyChoose />
+        <Divider />
+        <Value />
         <Divider />
         <HowItWorks />
         <Divider />

@@ -70,7 +70,7 @@ const CountDownCurrency = ({ startValue, endValue }: { startValue: number; endVa
 
 export function WhyChoose() {
   return (
-    <section id="overview" className="bg-[#39A470] py-20 md:py-28">
+    <section id="overview" className="bg-white py-20 md:py-28">
       <div className="mx-auto max-w-[1380px] px-5 md:px-8">
         <div className="max-w-3xl">
           <h2 className="text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">

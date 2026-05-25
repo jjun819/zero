@@ -57,7 +57,7 @@ export function Test() {
       ref={sectionRef}
       id="test"
       className={`pb-32 pt-48 transition-colors duration-700 md:pb-48 md:pt-64 ${
-        isDark ? "bg-[#39A470]" : "bg-white"
+        isDark ? "bg-[#141414]" : "bg-white"
       }`}
     >
       <div className="mx-auto max-w-[1380px] px-5 md:px-8">

@@ -1,4 +1,3 @@
-import { BadgeDollarSign, Building2, ChartNoAxesCombined, PlugZap } from "lucide-react";
 import evCharger from "@/assets/ev-charger.jpg";
 import futureImage from "@/assets/future.png";
 import officeBuilding from "@/assets/office-building.jpg";
@@ -10,28 +9,24 @@ const valueItems = [
     text: "Turn qualified stalls into charging income without adding equipment, installation, or management costs to your budget.",
     image: officeBuilding,
     alt: "Commercial property parking area",
-    icon: ChartNoAxesCombined,
   },
   {
     title: "Tenant attraction and retention",
     text: "Offer convenient EV access with networked chargers that support everyday drivers and high-traffic properties.",
     image: tenantImage,
     alt: "Tenant using EV charging",
-    icon: PlugZap,
   },
   {
     title: "Future Proof",
     text: "Future-proof your property with EV-ready infrastructure.",
     image: futureImage,
     alt: "Future-proof EV charging property value",
-    icon: Building2,
   },
   {
     title: "Environmental impact",
     text: "Once chargers are live, the property owner or agreement holder receives 10% of monthly net profit automatically.",
     image: evCharger,
     alt: "EV charger installed at a parking space",
-    icon: BadgeDollarSign,
   },
 ];
 
@@ -47,8 +42,6 @@ export function Value() {
 
         <div className="grid gap-x-6 gap-y-9 md:grid-cols-2 md:gap-y-10">
           {valueItems.map((item) => {
-            const Icon = item.icon;
-
             return (
               <article key={item.title}>
                 <div className="relative aspect-[1.5/1] overflow-hidden rounded-lg bg-[#F4F3EF]">
@@ -59,9 +52,6 @@ export function Value() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.42),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.2),rgba(239,242,251,0.16))]" />
-                  <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white/90 text-[#2D865B] shadow-sm backdrop-blur">
-                    <Icon className="h-5 w-5" strokeWidth={1.7} aria-hidden="true" />
-                  </div>
                 </div>
                 <div className="mt-3">
                   <h3 className="text-base font-semibold leading-tight text-foreground">

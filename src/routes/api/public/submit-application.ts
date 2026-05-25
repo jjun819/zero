@@ -59,11 +59,34 @@ export const Route = createFileRoute('/api/public/submit-application')({
         }
 
         const data = parsed.data
+        const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+        // --- 1. Persist the lead first ---
+        // This is the system of record. If email fails later, the lead is safe.
+        const { data: application, error: insertError } = await supabase
+          .from('applications')
+          .insert({
+            first_name: data.firstName,
+            last_name: data.lastName,
+            email: data.email,
+            phone: data.phone,
+            address: data.address,
+            audience: data.audience ?? null,
+            property_type: data.propertyType,
+            message: data.message ?? null,
+          })
+          .select('id')
+          .single()
+
+        if (insertError || !application) {
+          console.error('Failed to save application', insertError)
+          return Response.json({ error: 'Failed to submit application' }, { status: 500 })
+        }
+
+        // --- 2. Send notification email ---
         const template = TEMPLATES[TEMPLATE_NAME]
         const recipient = template.to!
         const normalizedRecipient = recipient.toLowerCase()
-
-        const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
         const templateData = {
           ...data,
@@ -134,6 +157,7 @@ export const Route = createFileRoute('/api/public/submit-application')({
         })
 
         if (enqueueError) {
+          // Lead is already saved — log the email failure but don't surface it as an error.
           console.error('Failed to enqueue application email', enqueueError)
           await supabase.from('email_send_log').insert({
             message_id: messageId,
@@ -142,7 +166,12 @@ export const Route = createFileRoute('/api/public/submit-application')({
             status: 'failed',
             error_message: 'Failed to enqueue email',
           })
-          return Response.json({ error: 'Failed to submit application' }, { status: 500 })
+        } else {
+          // Link the email message back to the application row for easy cross-referencing.
+          await supabase
+            .from('applications')
+            .update({ email_message_id: messageId })
+            .eq('id', application.id)
         }
 
         return Response.json({ success: true })

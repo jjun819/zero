@@ -35,7 +35,7 @@ function L3FastDcEvChargerPage() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        <section className="bg-white py-16 md:py-24">
+        <section className="bg-[#EBF5EF] py-16 md:py-24">
           <div className="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[minmax(0,1fr)_minmax(320px,0.85fr)] md:px-8">
             <div className="flex flex-col justify-center">
               <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
@@ -66,7 +66,7 @@ function L3FastDcEvChargerPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-50 p-8">
+            <div className="flex items-center justify-center rounded-2xl border border-[#C6E0CE] bg-[#D8EEE0] p-8">
               <img
                 src={productL3}
                 alt="L3 DC Fast EV Charger"

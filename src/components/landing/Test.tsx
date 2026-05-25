@@ -58,19 +58,20 @@ export function Test() {
   const solutionIn = fadeRange(scrollProgress, 0.19, 0.28);
   const solutionOut = fadeRange(scrollProgress, 0.32, 0.44);
   const zeroCostIn = fadeRange(scrollProgress, 0.44, 0.56);
-  const numberProgress = fadeRange(scrollProgress, 0.52, 0.68);
+  const numberProgress = fadeRange(scrollProgress, 0.52, 0.72);
   const titleOpacity = 1 - titleFade;
   const solutionOpacity = solutionIn * (1 - solutionOut);
-  const zeroCostOpacity = zeroCostIn;
+  const zeroCostOut = fadeRange(scrollProgress, 0.94, 1);
+  const zeroCostOpacity = zeroCostIn * (1 - zeroCostOut);
   const animatedValue = Math.round(1000 - 1000 * numberProgress);
 
   return (
-    <section ref={sectionRef} id="test" className="relative min-h-[440vh] bg-white">
+    <section ref={sectionRef} id="test" className="relative min-h-[420vh] bg-white">
       <div className="sticky top-0 flex h-screen items-center">
         <div className="mx-auto w-full max-w-[1380px] px-5 md:px-8">
           <div className="relative mx-auto min-h-[16rem] max-w-5xl md:min-h-[18rem]">
             <h2
-              className="absolute inset-0 flex items-center justify-center text-center text-3xl font-semibold leading-tight text-slate-950 md:text-4xl lg:text-5xl"
+              className="absolute inset-0 flex items-center justify-center text-center text-4xl font-semibold leading-tight text-slate-950 md:text-5xl lg:text-6xl"
               style={{
                 opacity: titleOpacity,
                 transform: `translateY(${-20 * titleFade}px)`,
@@ -81,7 +82,7 @@ export function Test() {
             </h2>
 
             <h2
-              className="absolute inset-0 flex items-center justify-center text-center text-3xl font-semibold leading-tight text-slate-950 md:text-4xl lg:text-5xl"
+              className="absolute inset-0 flex items-center justify-center text-center text-4xl font-semibold leading-tight text-slate-950 md:text-5xl lg:text-6xl"
               style={{
                 opacity: solutionOpacity,
                 transform: `translateY(${20 * (1 - solutionIn) - 20 * solutionOut}px)`,
@@ -95,21 +96,21 @@ export function Test() {
               className="absolute inset-0 flex flex-col items-center justify-center text-center"
               style={{
                 opacity: zeroCostOpacity,
-                transform: `translateY(${22 * (1 - zeroCostIn)}px)`,
+                transform: `translateY(${22 * (1 - zeroCostIn) - 18 * zeroCostOut}px)`,
                 willChange: "opacity, transform",
               }}
             >
-              <h2 className="text-3xl font-semibold leading-tight text-slate-950 md:text-4xl lg:text-5xl">
+              <h2 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl lg:text-6xl">
                 When we say{" "}
                 <span className="inline" style={gradientTextStyle}>
                   Zero Cost
                 </span>
                 , we mean it.
               </h2>
-              <p className="mt-8 text-6xl font-semibold leading-none tracking-tight text-[#2D865B] md:text-7xl lg:text-8xl">
+              <p className="mt-8 text-7xl font-semibold leading-none tracking-tight text-[#2D865B] md:text-8xl lg:text-9xl">
                 ${animatedValue.toLocaleString("en-US")}
               </p>
-              <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-slate-600 md:text-xl">
+              <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600 md:text-2xl">
                 No capital investment. No project risk. We handle everything from
                 start to finish
               </p>

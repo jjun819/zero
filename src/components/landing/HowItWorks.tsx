@@ -89,14 +89,10 @@ export function HowItWorks() {
   }, []);
 
   return (
-    <section id="how-it-works" className="bg-white py-20 md:py-28">
+    <section id="how-it-works" className="bg-white pb-20 pt-10 md:pb-28 md:pt-14">
       <div className="mx-auto max-w-[1380px] px-5 md:px-8">
         <div className="mb-12 max-w-3xl">
-          <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-primary">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
-            Four simple steps
-          </span>
-          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             From application to charging in four steps.
           </h2>
           <p className="mt-4 text-[1.1875rem] leading-relaxed text-foreground md:text-[1.375rem]">

@@ -112,13 +112,9 @@ function ProductCard({
 
 export function Products() {
   return (
-    <section id="products" className="bg-white py-20 md:py-28">
+    <section id="products" className="bg-white pb-20 pt-10 md:pb-28 md:pt-14">
       <div className="mx-auto max-w-[1380px] px-5 md:px-8">
         <div className="mb-12 max-w-3xl">
-          <div className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2D865B]">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#2D865B]" />
-            Products
-          </div>
           <h2 className="mb-2 text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
             Everything you need to go live.
           </h2>

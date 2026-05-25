@@ -43,6 +43,8 @@ const Divider = () => (
   </div>
 );
 
+const FullDivider = () => <hr className="border-t border-black/20" />;
+
 function Index() {
   return (
     <div className="min-h-screen bg-background">
@@ -61,7 +63,7 @@ function Index() {
         <Qualifications />
         <Divider />
         <Application />
-        <Divider />
+        <FullDivider />
         <FAQ />
       </main>
       <Footer />

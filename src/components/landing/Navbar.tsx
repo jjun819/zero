@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronRight, Menu, X, Zap } from "lucide-react";
 
 const evChargerLinks = [
@@ -12,9 +12,7 @@ const productLinks = [
   { href: "#products", label: "Reuse of EV Battery Power" },
 ];
 
-const serviceLinks = [
-  { href: "#services", label: "Installation" },
-];
+const serviceLinks = [{ href: "#services", label: "Installation" }];
 
 const zeroCostLinks = [
   { href: "#solutions", label: "Residential" },
@@ -22,9 +20,86 @@ const zeroCostLinks = [
 ];
 
 const APPLY_HREF = "#apply";
+type DesktopMenu = "product" | "services" | "solutions";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [productOpen, setProductOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [pinnedMenu, setPinnedMenu] = useState<DesktopMenu | null>(null);
+  const productMenuRef = useRef<HTMLDivElement>(null);
+  const servicesMenuRef = useRef<HTMLDivElement>(null);
+  const solutionsMenuRef = useRef<HTMLDivElement>(null);
+  const mobileProductMenuRef = useRef<HTMLDivElement>(null);
+
+  function showDesktopMenu(menu: DesktopMenu) {
+    setProductOpen(menu === "product");
+    setServicesOpen(menu === "services");
+    setSolutionsOpen(menu === "solutions");
+  }
+
+  function closeDesktopMenus() {
+    setProductOpen(false);
+    setServicesOpen(false);
+    setSolutionsOpen(false);
+    setPinnedMenu(null);
+  }
+
+  function closeDesktopMenuOnLeave(menu: DesktopMenu) {
+    if (pinnedMenu !== menu) {
+      if (menu === "product") setProductOpen(false);
+      if (menu === "services") setServicesOpen(false);
+      if (menu === "solutions") setSolutionsOpen(false);
+    }
+  }
+
+  function togglePinnedDesktopMenu(menu: DesktopMenu) {
+    if (pinnedMenu === menu) {
+      closeDesktopMenus();
+      return;
+    }
+
+    showDesktopMenu(menu);
+    setPinnedMenu(menu);
+  }
+
+  useEffect(() => {
+    function handleDocumentClick(event: MouseEvent) {
+      const target = event.target as Node;
+
+      if (
+        productMenuRef.current?.contains(target) ||
+        servicesMenuRef.current?.contains(target) ||
+        solutionsMenuRef.current?.contains(target) ||
+        mobileProductMenuRef.current?.contains(target)
+      ) {
+        return;
+      }
+
+      setProductOpen(false);
+      setServicesOpen(false);
+      setSolutionsOpen(false);
+      setPinnedMenu(null);
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setProductOpen(false);
+        setServicesOpen(false);
+        setSolutionsOpen(false);
+        setPinnedMenu(null);
+      }
+    }
+
+    document.addEventListener("mousedown", handleDocumentClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleDocumentClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
@@ -33,22 +108,35 @@ export function Navbar() {
           <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
             <Zap className="h-4 w-4" />
           </span>
-          <span className="text-base font-bold tracking-tight text-foreground">
-            UbiqPower
-          </span>
+          <span className="text-base font-bold tracking-tight text-foreground">UbiqPower</span>
         </a>
 
         <nav className="ml-auto hidden items-center gap-8 md:flex">
-          <div className="group relative flex h-16 items-center">
-            <a
-              href="#products"
-              className="inline-flex items-center gap-1 text-sm font-medium text-foreground/75 transition-colors hover:text-primary group-hover:text-primary"
+          <div
+            ref={productMenuRef}
+            onMouseEnter={() => showDesktopMenu("product")}
+            onMouseLeave={() => closeDesktopMenuOnLeave("product")}
+            className="relative flex h-16 items-center"
+          >
+            <button
+              type="button"
+              aria-expanded={productOpen}
+              aria-haspopup="menu"
+              onClick={() => togglePinnedDesktopMenu("product")}
+              className="inline-flex items-center gap-1 text-sm font-medium text-foreground/75 transition-colors hover:text-primary data-[open=true]:text-primary"
+              data-open={productOpen}
             >
               Product
-              <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
-            </a>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${productOpen ? "rotate-180" : ""}`}
+              />
+            </button>
 
-            <div className="invisible absolute left-1/2 top-full w-96 -translate-x-1/2 pt-4 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+            <div
+              className={`absolute left-1/2 top-full w-96 -translate-x-1/2 pt-4 transition-all duration-150 ${
+                productOpen ? "visible opacity-100" : "invisible opacity-0"
+              }`}
+            >
               <div className="rounded-xl border border-border bg-background p-3 shadow-xl">
                 <div className="grid gap-1">
                   <div className="group/ev relative">
@@ -67,6 +155,7 @@ export function Navbar() {
                             <a
                               key={l.label}
                               href={l.href}
+                              onClick={closeDesktopMenus}
                               className="rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
                             >
                               {l.label}
@@ -81,6 +170,7 @@ export function Navbar() {
                     <a
                       key={l.label}
                       href={l.href}
+                      onClick={closeDesktopMenus}
                       className="rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
                     >
                       {l.label}
@@ -91,22 +181,38 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="group/services relative flex h-16 items-center">
-            <a
-              href="#services"
-              className="inline-flex items-center gap-1 text-sm font-medium text-foreground/75 transition-colors hover:text-primary group-hover/services:text-primary"
+          <div
+            ref={servicesMenuRef}
+            onMouseEnter={() => showDesktopMenu("services")}
+            onMouseLeave={() => closeDesktopMenuOnLeave("services")}
+            className="relative flex h-16 items-center"
+          >
+            <button
+              type="button"
+              aria-expanded={servicesOpen}
+              aria-haspopup="menu"
+              onClick={() => togglePinnedDesktopMenu("services")}
+              className="inline-flex items-center gap-1 text-sm font-medium text-foreground/75 transition-colors hover:text-primary data-[open=true]:text-primary"
+              data-open={servicesOpen}
             >
               Services
-              <ChevronDown className="h-4 w-4 transition-transform group-hover/services:rotate-180" />
-            </a>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`}
+              />
+            </button>
 
-            <div className="invisible absolute left-1/2 top-full w-72 -translate-x-1/2 pt-4 opacity-0 transition-all duration-150 group-hover/services:visible group-hover/services:opacity-100 group-focus-within/services:visible group-focus-within/services:opacity-100">
+            <div
+              className={`absolute left-1/2 top-full w-72 -translate-x-1/2 pt-4 transition-all duration-150 ${
+                servicesOpen ? "visible opacity-100" : "invisible opacity-0"
+              }`}
+            >
               <div className="rounded-xl border border-border bg-background p-3 shadow-xl">
                 <div className="grid gap-1">
                   {serviceLinks.map((l) => (
                     <a
                       key={l.label}
                       href={l.href}
+                      onClick={closeDesktopMenus}
                       className="rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
                     >
                       {l.label}
@@ -117,20 +223,36 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="group/solutions relative flex h-16 items-center">
-            <a
-              href="#solutions"
-              className="inline-flex items-center gap-1 text-sm font-medium text-foreground/75 transition-colors hover:text-primary group-hover/solutions:text-primary"
+          <div
+            ref={solutionsMenuRef}
+            onMouseEnter={() => showDesktopMenu("solutions")}
+            onMouseLeave={() => closeDesktopMenuOnLeave("solutions")}
+            className="relative flex h-16 items-center"
+          >
+            <button
+              type="button"
+              aria-expanded={solutionsOpen}
+              aria-haspopup="menu"
+              onClick={() => togglePinnedDesktopMenu("solutions")}
+              className="inline-flex items-center gap-1 text-sm font-medium text-foreground/75 transition-colors hover:text-primary data-[open=true]:text-primary"
+              data-open={solutionsOpen}
             >
               Solutions
-              <ChevronDown className="h-4 w-4 transition-transform group-hover/solutions:rotate-180" />
-            </a>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${solutionsOpen ? "rotate-180" : ""}`}
+              />
+            </button>
 
-            <div className="invisible absolute left-1/2 top-full w-80 -translate-x-1/2 pt-4 opacity-0 transition-all duration-150 group-hover/solutions:visible group-hover/solutions:opacity-100 group-focus-within/solutions:visible group-focus-within/solutions:opacity-100">
+            <div
+              className={`absolute left-1/2 top-full w-80 -translate-x-1/2 pt-4 transition-all duration-150 ${
+                solutionsOpen ? "visible opacity-100" : "invisible opacity-0"
+              }`}
+            >
               <div className="rounded-xl border border-border bg-background p-3 shadow-xl">
                 <div className="group/zero relative">
                   <a
                     href="#solutions"
+                    onClick={closeDesktopMenus}
                     className="flex items-center justify-between gap-4 rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary group-hover/zero:bg-secondary group-hover/zero:text-primary"
                   >
                     Zero Cost
@@ -144,6 +266,7 @@ export function Navbar() {
                           <a
                             key={l.label}
                             href={l.href}
+                            onClick={closeDesktopMenus}
                             className="rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
                           >
                             {l.label}
@@ -185,43 +308,60 @@ export function Navbar() {
       {open && (
         <div className="border-t border-border bg-background md:hidden">
           <div className="mx-auto flex max-w-[1380px] flex-col gap-1 px-5 py-4">
-            <a
-              href="#products"
-              onClick={() => setOpen(false)}
-              className="rounded-md px-2 py-2 text-sm font-medium text-foreground/80 hover:bg-secondary"
-            >
-              Product
-            </a>
-            <div className="ml-3 grid gap-1 border-l border-border pl-3">
-              <a
-                href="#products"
-                onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-2 text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-primary"
+            <div ref={mobileProductMenuRef}>
+              <button
+                type="button"
+                aria-expanded={productOpen}
+                onClick={() => setProductOpen((v) => !v)}
+                className="flex w-full items-center justify-between rounded-md px-2 py-2 text-sm font-medium text-foreground/80 hover:bg-secondary"
               >
-                EV Chargers
-              </a>
-              <div className="ml-3 grid gap-1 border-l border-border pl-3">
-                {evChargerLinks.map((l) => (
+                Product
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${productOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              {productOpen && (
+                <div className="ml-3 grid gap-1 border-l border-border pl-3">
                   <a
-                    key={l.label}
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="rounded-md px-2 py-2 text-sm font-medium text-foreground/60 hover:bg-secondary hover:text-primary"
+                    href="#products"
+                    onClick={() => {
+                      setOpen(false);
+                      setProductOpen(false);
+                    }}
+                    className="rounded-md px-2 py-2 text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-primary"
                   >
-                    {l.label}
+                    EV Chargers
                   </a>
-                ))}
-              </div>
-              {productLinks.map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-md px-2 py-2 text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-primary"
-                >
-                  {l.label}
-                </a>
-              ))}
+                  <div className="ml-3 grid gap-1 border-l border-border pl-3">
+                    {evChargerLinks.map((l) => (
+                      <a
+                        key={l.label}
+                        href={l.href}
+                        onClick={() => {
+                          setOpen(false);
+                          setProductOpen(false);
+                        }}
+                        className="rounded-md px-2 py-2 text-sm font-medium text-foreground/60 hover:bg-secondary hover:text-primary"
+                      >
+                        {l.label}
+                      </a>
+                    ))}
+                  </div>
+                  {productLinks.map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      onClick={() => {
+                        setOpen(false);
+                        setProductOpen(false);
+                      }}
+                      className="rounded-md px-2 py-2 text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-primary"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
             <a
               href="#services"

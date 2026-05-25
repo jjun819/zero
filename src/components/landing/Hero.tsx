@@ -71,12 +71,6 @@ export function Hero() {
               </span>
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 transition-all duration-500 group-hover:translate-x-full group-hover:opacity-20" />
             </a>
-            <a
-              href="#how-it-works"
-              className="group inline-flex h-12 items-center rounded-md border border-slate-300 bg-white px-6 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:border-[#2D865B]/50 hover:text-[#2D865B] hover:shadow-md"
-            >
-              Learn How It Works
-            </a>
           </div>
         </div>
 

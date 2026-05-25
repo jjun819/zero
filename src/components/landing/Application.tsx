@@ -21,12 +21,6 @@ import { cn } from "@/lib/utils";
 const inputClass =
   "border-2 border-muted-foreground/30 bg-secondary focus-visible:border-primary focus-visible:bg-card";
 
-const audienceOptions = [
-  { value: "residents", label: "Only for Residents" },
-  { value: "customers_employees", label: "Customers / Employees" },
-  { value: "public", label: "Open to Public" },
-] as const;
-
 const propertyTypeOptions = [
   { value: "strata_corporations", label: "Strata Corporations" },
   { value: "multi_unit_residence", label: "Multi-Unit Residence" },
@@ -43,9 +37,6 @@ const schema = z.object({
     .trim()
     .min(3, "Enter the parking space address")
     .max(200),
-  audience: z.enum(["residents", "customers_employees", "public"], {
-    required_error: "Select one option",
-  }),
   propertyType: z.enum(
     ["strata_corporations", "multi_unit_residence", "commercial_building"],
     {
@@ -71,7 +62,6 @@ export function Application() {
       email: "",
       phone: "",
       address: "",
-      audience: undefined as unknown as FormValues["audience"],
       propertyType: undefined as unknown as FormValues["propertyType"],
       message: "",
       consent: false as unknown as true,
@@ -237,42 +227,6 @@ export function Application() {
                               placeholder="123 Main St, Vancouver, BC"
                               {...field}
                             />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="audience"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Who will this be available to?</FormLabel>
-                          <FormControl>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                              {audienceOptions.map((opt) => {
-                                const selected = field.value === opt.value;
-                                return (
-                                  <button
-                                    type="button"
-                                    key={opt.value}
-                                    onClick={() => field.onChange(opt.value)}
-                                    className={cn(
-                                      "relative text-left rounded-lg border-2 px-3 py-3 text-sm transition-colors",
-                                      selected
-                                        ? "border-primary bg-primary/15 text-primary font-medium"
-                                        : "border-muted-foreground/30 bg-secondary text-foreground hover:border-primary hover:bg-primary/5",
-                                    )}
-                                  >
-                                    {selected && (
-                                      <Check className="absolute top-2 right-2 h-4 w-4 text-primary" />
-                                    )}
-                                    {opt.label}
-                                  </button>
-                                );
-                              })}
-                            </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>

@@ -15,6 +15,7 @@ import { Route as ProductsL3FastDcEvChargerRouteImport } from './routes/products
 import { Route as ProductsL2EvChargerRouteImport } from './routes/products/l2-ev-charger'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ApiPublicSubmitContactRouteImport } from './routes/api/public/submit-contact'
 import { Route as ApiPublicSubmitApplicationRouteImport } from './routes/api/public/submit-application'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -51,6 +52,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSubmitContactRoute = ApiPublicSubmitContactRouteImport.update({
+  id: '/api/public/submit-contact',
+  path: '/api/public/submit-contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicSubmitApplicationRoute =
   ApiPublicSubmitApplicationRouteImport.update({
     id: '/api/public/submit-application',
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
   '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
   '/api/public/submit-application': typeof ApiPublicSubmitApplicationRoute
+  '/api/public/submit-contact': typeof ApiPublicSubmitContactRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
   '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
   '/api/public/submit-application': typeof ApiPublicSubmitApplicationRoute
+  '/api/public/submit-contact': typeof ApiPublicSubmitContactRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
   '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
   '/api/public/submit-application': typeof ApiPublicSubmitApplicationRoute
+  '/api/public/submit-contact': typeof ApiPublicSubmitContactRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
     | '/products/l2-ev-charger'
     | '/products/l3-fast-dc-ev-charger'
     | '/api/public/submit-application'
+    | '/api/public/submit-contact'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
     | '/products/l2-ev-charger'
     | '/products/l3-fast-dc-ev-charger'
     | '/api/public/submit-application'
+    | '/api/public/submit-contact'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/products/l2-ev-charger'
     | '/products/l3-fast-dc-ev-charger'
     | '/api/public/submit-application'
+    | '/api/public/submit-contact'
     | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -159,6 +171,7 @@ export interface RootRouteChildren {
   ProductsL2EvChargerRoute: typeof ProductsL2EvChargerRoute
   ProductsL3FastDcEvChargerRoute: typeof ProductsL3FastDcEvChargerRoute
   ApiPublicSubmitApplicationRoute: typeof ApiPublicSubmitApplicationRoute
+  ApiPublicSubmitContactRoute: typeof ApiPublicSubmitContactRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -209,6 +222,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/submit-contact': {
+      id: '/api/public/submit-contact'
+      path: '/api/public/submit-contact'
+      fullPath: '/api/public/submit-contact'
+      preLoaderRoute: typeof ApiPublicSubmitContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/submit-application': {
       id: '/api/public/submit-application'
       path: '/api/public/submit-application'
@@ -247,6 +267,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsL2EvChargerRoute: ProductsL2EvChargerRoute,
   ProductsL3FastDcEvChargerRoute: ProductsL3FastDcEvChargerRoute,
   ApiPublicSubmitApplicationRoute: ApiPublicSubmitApplicationRoute,
+  ApiPublicSubmitContactRoute: ApiPublicSubmitContactRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,

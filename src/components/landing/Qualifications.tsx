@@ -37,10 +37,6 @@ export function Qualifications() {
             </li>
           ))}
         </ul>
-
-        <p className="mt-8 text-sm text-muted-foreground">
-          Not sure if your property qualifies? Apply and our team will review your site.
-        </p>
       </div>
     </section>
   );

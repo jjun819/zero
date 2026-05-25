@@ -32,22 +32,22 @@ export function Footer() {
 
           <div className="md:col-span-3">
             <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/50">
-              Program
+              Navigation
             </h4>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
-                <a href="#Products" className="text-white/80 hover:text-[#1EDDC7]">
-                  Products
+                <a href="#products" className="text-white/80 hover:text-[#1EDDC7]">
+                  Product
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="text-white/80 hover:text-[#1EDDC7]">
-                  How It Works
+                <a href="#services" className="text-white/80 hover:text-[#1EDDC7]">
+                  Services
                 </a>
               </li>
               <li>
-                <a href="#faq" className="text-white/80 hover:text-[#1EDDC7]">
-                  FAQ
+                <a href="#solutions" className="text-white/80 hover:text-[#1EDDC7]">
+                  Solutions
                 </a>
               </li>
             </ul>

@@ -54,10 +54,10 @@ export function Value() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.42),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.2),rgba(239,242,251,0.16))]" />
                 </div>
                 <div className="mt-3">
-                  <h3 className="text-base font-semibold leading-tight text-foreground">
+                  <h3 className="text-lg font-semibold leading-tight text-foreground">
                     {item.title}
                   </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-1 text-base leading-relaxed text-muted-foreground">
                     {item.text}
                   </p>
                 </div>

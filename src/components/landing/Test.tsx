@@ -19,6 +19,21 @@ const gradientTextStyle = {
   animation: "gradientFlow 4s ease infinite",
 };
 
+const stats = [
+  {
+    value: "4000+",
+    label: "Chargers sold and installed",
+  },
+  {
+    value: "2000+",
+    label: "Customers served",
+  },
+  {
+    value: "10+",
+    label: "Years of experience",
+  },
+];
+
 export function Test() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -61,8 +76,11 @@ export function Test() {
   const numberProgress = fadeRange(scrollProgress, 0.52, 0.72);
   const titleOpacity = 1 - titleFade;
   const solutionOpacity = solutionIn * (1 - solutionOut);
-  const zeroCostOut = fadeRange(scrollProgress, 0.94, 1);
+  const zeroCostOut = fadeRange(scrollProgress, 0.9, 1);
   const zeroCostOpacity = zeroCostIn * (1 - zeroCostOut);
+  const statsIn = fadeRange(scrollProgress, 0.56, 0.66);
+  const statsOut = fadeRange(scrollProgress, 0.9, 1);
+  const statsOpacity = statsIn * (1 - statsOut);
   const animatedValue = Math.round(1000 - 1000 * numberProgress);
 
   return (
@@ -114,6 +132,31 @@ export function Test() {
                 No capital investment. No project risk. We handle everything from
                 start to finish
               </p>
+            </div>
+
+            <div
+              className="absolute inset-x-0 top-[calc(50%+13rem)] mx-auto grid max-w-6xl gap-6 md:grid-cols-3 md:gap-0 lg:top-[calc(50%+15rem)]"
+              style={{
+                opacity: statsOpacity,
+                transform: `translateY(${24 * (1 - statsOpacity)}px)`,
+                willChange: "opacity, transform",
+              }}
+            >
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="flex justify-center"
+                >
+                  <div className="w-fit min-w-[14rem] border-l-2 border-[#2D865B] pl-7 text-left md:min-w-[16rem] md:pl-10">
+                    <p className="text-5xl font-semibold leading-none tracking-tight text-slate-950 md:text-6xl lg:text-7xl">
+                      {stat.value}
+                    </p>
+                    <p className="mt-4 text-lg leading-relaxed text-[#56617D] md:text-xl">
+                      {stat.label}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

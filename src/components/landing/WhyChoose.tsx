@@ -24,7 +24,7 @@ const gradientTextStyle = {
 
 export function WhyChoose() {
   return (
-    <section id="overview" className="bg-[#EFF2FB] py-20 md:py-28">
+    <section id="overview" className="bg-white pb-20 pt-12 md:pb-28 md:pt-16">
       <div className="mx-auto max-w-[1380px] px-5 md:px-8">
         <div className="max-w-3xl">
           <h2 className="text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
@@ -80,7 +80,7 @@ export function WhyChoose() {
             return (
               <div
                 key={item.heading}
-                className="flex min-h-[340px] flex-col rounded-xl border border-black/10 bg-white/70 p-8 backdrop-blur-xl md:p-10"
+                className="flex min-h-[340px] flex-col rounded-xl border border-black/25 bg-white/70 p-8 shadow-lg shadow-black/10 backdrop-blur-xl md:p-10"
               >
                 <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg bg-[#E6F4EE] text-[#2D865B]">
                   <Icon className="h-5 w-5" strokeWidth={1.8} aria-hidden="true" />
@@ -106,20 +106,6 @@ export function WhyChoose() {
               </div>
             );
           })}
-        </div>
-
-        <div className="mt-8 flex items-center justify-between rounded-2xl border border-black/10 bg-white p-6 md:p-8">
-          <span className="text-base leading-relaxed text-muted-foreground md:text-lg">
-            <b className="text-foreground">11+ years</b> EV charging experience ·{" "}
-            <b className="text-foreground">4,000+</b> chargers managed ·{" "}
-            <b className="text-foreground">OCPP 1.6</b> open standard
-          </span>
-          <a
-            href="#apply"
-            className="inline-flex items-center gap-2 text-base font-medium text-foreground transition-colors hover:text-primary"
-          >
-            Check Eligibility <ArrowIcon />
-          </a>
         </div>
       </div>
     </section>

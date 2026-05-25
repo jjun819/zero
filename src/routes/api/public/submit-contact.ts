@@ -8,21 +8,13 @@ import { TEMPLATES } from '@/lib/email-templates/registry'
 const SITE_NAME = 'UbiqPower'
 const SENDER_DOMAIN = 'notify.buildwithfif.com'
 const FROM_DOMAIN = 'notify.buildwithfif.com'
-const TEMPLATE_NAME = 'application-submission'
+const TEMPLATE_NAME = 'contact-submission'
 
-const submissionSchema = z.object({
-  firstName: z.string().trim().min(1).max(80),
-  lastName: z.string().trim().min(1).max(80),
+const contactSchema = z.object({
+  name: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(160),
-  phone: z.string().trim().min(7).max(30),
-  address: z.string().trim().min(3).max(200),
-  audience: z.enum(['residents', 'customers_employees', 'public']).optional(),
-  propertyType: z.enum([
-    'strata_corporations',
-    'multi_unit_residence',
-    'commercial_building',
-  ]),
-  message: z.string().trim().max(1000).optional(),
+  phone: z.string().trim().max(30).optional(),
+  message: z.string().trim().min(1).max(2000),
 })
 
 function generateToken(): string {
@@ -33,7 +25,7 @@ function generateToken(): string {
     .join('')
 }
 
-export const Route = createFileRoute('/api/public/submit-application')({
+export const Route = createFileRoute('/api/public/submit-contact')({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -50,7 +42,7 @@ export const Route = createFileRoute('/api/public/submit-application')({
           return Response.json({ error: 'Invalid JSON' }, { status: 400 })
         }
 
-        const parsed = submissionSchema.safeParse(body)
+        const parsed = contactSchema.safeParse(body)
         if (!parsed.success) {
           return Response.json(
             { error: 'Invalid input', details: parsed.error.flatten() },
@@ -71,9 +63,8 @@ export const Route = createFileRoute('/api/public/submit-application')({
         }
 
         const messageId = crypto.randomUUID()
-        const idempotencyKey = `application-${messageId}`
+        const idempotencyKey = `contact-${messageId}`
 
-        // Ensure unsubscribe token exists (one per email)
         let unsubscribeToken: string
         const { data: existingToken } = await supabase
           .from('email_unsubscribe_tokens')
@@ -99,7 +90,6 @@ export const Route = createFileRoute('/api/public/submit-application')({
           if (stored) unsubscribeToken = stored.token
         }
 
-        // Render email
         const element = React.createElement(template.component, templateData)
         const html = await render(element)
         const plainText = await render(element, { plainText: true })
@@ -134,7 +124,7 @@ export const Route = createFileRoute('/api/public/submit-application')({
         })
 
         if (enqueueError) {
-          console.error('Failed to enqueue application email', enqueueError)
+          console.error('Failed to enqueue contact email', enqueueError)
           await supabase.from('email_send_log').insert({
             message_id: messageId,
             template_name: TEMPLATE_NAME,
@@ -142,7 +132,7 @@ export const Route = createFileRoute('/api/public/submit-application')({
             status: 'failed',
             error_message: 'Failed to enqueue email',
           })
-          return Response.json({ error: 'Failed to submit application' }, { status: 500 })
+          return Response.json({ error: 'Failed to submit contact message' }, { status: 500 })
         }
 
         return Response.json({ success: true })

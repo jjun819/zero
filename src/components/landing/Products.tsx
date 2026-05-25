@@ -13,7 +13,7 @@ const PRODUCTS = {
     description:
       "Ideal for residential, commercial, and workplace charging. 8-12 hour sessions, perfect for overnight or workday parking.",
     specs: [
-      "7.2-19.2 kW output",
+      "7.7 kW output",
       "OCPP 1.6 compatible",
       "Networked + local billing",
     ],
@@ -28,7 +28,7 @@ const PRODUCTS = {
     description:
       "High-speed charging for public and high-traffic locations. 20-45 minute sessions, ideal for retail plazas and highway corridors.",
     specs: [
-      "50-150 kW output",
+      "180 kW output",
       "CCS + CHAdeMO connectors",
       "Premium revenue per session",
     ],
@@ -39,7 +39,7 @@ function SpecItem({ text }: { text: string }) {
   return (
     <li className="flex items-start gap-2.5">
       <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#2D865B]" />
-      <span className="text-sm text-neutral-600">{text}</span>
+      <span className="text-sm text-black">{text}</span>
     </li>
   );
 }
@@ -71,7 +71,7 @@ function ProductCard({
           >
             {product.badge}
           </span>
-          <span className="text-xs font-medium uppercase tracking-wide text-neutral-500">
+          <span className="text-xs font-medium uppercase tracking-wide text-black">
             {product.label}
           </span>
         </div>
@@ -80,7 +80,7 @@ function ProductCard({
           {product.name}
         </h3>
 
-        <p className="mb-4 text-sm leading-relaxed text-neutral-600">
+        <p className="mb-4 text-sm leading-relaxed text-black">
           {product.description}
         </p>
 
@@ -122,7 +122,7 @@ export function Products() {
           <h2 className="mb-2 text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
             Everything you need to go live.
           </h2>
-          <p className="text-base leading-relaxed text-neutral-600 md:text-lg">
+          <p className="text-base leading-relaxed text-black md:text-lg">
             From L2 chargers for daily use to L3 fast DC for high-traffic
             properties, choose the hardware that fits your charging needs.
           </p>

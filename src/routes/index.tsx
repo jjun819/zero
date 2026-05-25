@@ -37,7 +37,11 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const Divider = () => <hr className="border-t border-black/20" />;
+const Divider = () => (
+  <div className="mx-auto max-w-[1380px] px-5 md:px-8">
+    <hr className="border-t border-black/20" />
+  </div>
+);
 
 function Index() {
   return (
@@ -46,7 +50,6 @@ function Index() {
       <main>
         <Hero />
         <Test />
-        <Divider />
         <WhyChoose />
         <Divider />
         <Value />

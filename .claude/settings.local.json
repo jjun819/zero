@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "WebSearch",
-      "Bash(Remove-Item \"c:\\\\Users\\\\Sungjoon\\\\Downloads\\\\main \\(1\\)\\\\src\\\\assets\\\\hero-bg-ev-station.jpg\", \"c:\\\\Users\\\\Sungjoon\\\\Downloads\\\\main \\(1\\)\\\\src\\\\assets\\\\hero-bg.mp4\", \"c:\\\\Users\\\\Sungjoon\\\\Downloads\\\\main \\(1\\)\\\\src\\\\assets\\\\hero-ev-charging.jpg\", \"c:\\\\Users\\\\Sungjoon\\\\Downloads\\\\main \\(1\\)\\\\src\\\\assets\\\\smiling-man.webp\", \"c:\\\\Users\\\\Sungjoon\\\\Downloads\\\\main \\(1\\)\\\\src\\\\assets\\\\parking.png\")"
-    ]
-  }
-}

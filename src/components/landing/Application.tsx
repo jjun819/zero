@@ -65,18 +65,7 @@ export function Application() {
     },
   });
 
-  const onSubmit = async (values: FormValues) => {
-    const res = await fetch("/api/public/submit-application", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
-    if (!res.ok) {
-      form.setError("root", {
-        message: "Something went wrong submitting your application. Please try again.",
-      });
-      return;
-    }
+  const onSubmit = async () => {
     setSubmitted(true);
   };
 

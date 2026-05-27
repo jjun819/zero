@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ChevronDown, ChevronRight, Menu, X, Zap } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const evChargerLinks = [
   { href: "/products/l2-ev-charger", label: "L2 EV Charger" },
@@ -7,13 +8,13 @@ const evChargerLinks = [
 ];
 
 const productLinks = [
-  { href: "#products", label: "Energy Storage Solutions" },
-  { href: "#products", label: "Green Renewal Power" },
+  { href: "https://ess.foreseeson.com/", label: "Energy Storage Solutions" },
+  { href: "https://ess.foreseeson.com/", label: "Green Renewal Power" },
   { href: "#products", label: "Reuse of EV Battery Power" },
 ];
 
 const serviceLinks = [
-  { href: "#services", label: "Installation" },
+  { href: "https://foreseeson-evse.com/", label: "Installation" },
 ];
 
 const zeroCostLinks = [
@@ -25,7 +26,6 @@ const APPLY_HREF = "#apply";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
   const [calendlyOpen, setCalendlyOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<
     "product" | "services" | "solutions" | null
@@ -47,19 +47,29 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-        <div className="mx-auto flex h-16 max-w-[1380px] items-center px-5 pl-6 md:px-8 md:pl-16">
-          <a href="/" className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
-              <Zap className="h-4 w-4" />
+      <header className="sticky top-0 z-50 border-b border-emerald-900/10 bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/85">
+        <div className="mx-auto flex h-24 max-w-[1380px] items-center px-5 pl-6 md:px-8 md:pl-16">
+          <a href="/" className="flex flex-col gap-1">
+            <span className="flex items-center gap-3">
+              <img
+                src={logo}
+                alt="UbiqPower"
+                className="h-12 w-auto object-contain"
+              />
+              <span className="text-3xl font-bold tracking-tight text-foreground">
+                <span style={{ fontFamily: '"Poppins", var(--font-sans)' }}>
+                  <span className="text-[#009B65]">Ubiq</span>
+                  <span className="text-[#0E353D]">Power</span>
+                </span>
+              </span>
             </span>
-            <span className="text-base font-bold tracking-tight text-foreground">
-              UbiqPower
+            <span className="text-center text-base font-medium leading-tight text-black">
+              Available Anytime Anywhere
             </span>
           </a>
 
         <nav ref={navRef} className="ml-auto hidden items-center gap-8 md:flex">
-          <div className="group relative flex h-16 items-center">
+          <div className="group relative flex h-24 items-center">
             <a
               href="#"
               onClick={(event) => {
@@ -68,7 +78,7 @@ export function Navbar() {
                   current === "product" ? null : "product",
                 );
               }}
-              className="inline-flex items-center gap-1 text-sm font-medium text-black transition-colors hover:text-primary group-hover:text-primary"
+              className="inline-flex items-center gap-1 text-lg font-medium text-black transition-colors hover:text-primary group-hover:text-primary"
             >
               Product
               <ChevronDown
@@ -117,6 +127,8 @@ export function Navbar() {
                     <a
                       key={l.label}
                       href={l.href}
+                      target={l.href.startsWith("http") ? "_blank" : undefined}
+                      rel={l.href.startsWith("http") ? "noreferrer" : undefined}
                       className="rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
                     >
                       {l.label}
@@ -127,7 +139,7 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="group/services relative flex h-16 items-center">
+          <div className="group/services relative flex h-24 items-center">
             <a
               href="#services"
               onClick={(event) => {
@@ -136,7 +148,7 @@ export function Navbar() {
                   current === "services" ? null : "services",
                 );
               }}
-              className="inline-flex items-center gap-1 text-sm font-medium text-black transition-colors hover:text-primary group-hover/services:text-primary"
+              className="inline-flex items-center gap-1 text-lg font-medium text-black transition-colors hover:text-primary group-hover/services:text-primary"
             >
               Services
               <ChevronDown
@@ -159,6 +171,8 @@ export function Navbar() {
                     <a
                       key={l.label}
                       href={l.href}
+                      target={l.href.startsWith("http") ? "_blank" : undefined}
+                      rel={l.href.startsWith("http") ? "noreferrer" : undefined}
                       className="rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
                     >
                       {l.label}
@@ -169,7 +183,7 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="group/solutions relative flex h-16 items-center">
+          <div className="group/solutions relative flex h-24 items-center">
             <a
               href="#solutions"
               onClick={(event) => {
@@ -178,7 +192,7 @@ export function Navbar() {
                   current === "solutions" ? null : "solutions",
                 );
               }}
-              className="inline-flex items-center gap-1 text-sm font-medium text-black transition-colors hover:text-primary group-hover/solutions:text-primary"
+              className="inline-flex items-center gap-1 text-lg font-medium text-black transition-colors hover:text-primary group-hover/solutions:text-primary"
             >
               Solutions
               <ChevronDown
@@ -227,13 +241,6 @@ export function Navbar() {
         </nav>
 
         <div className="ml-8 hidden items-center gap-3 md:flex">
-          <button
-            type="button"
-            onClick={() => setContactOpen(true)}
-            className="inline-flex h-10 cursor-pointer items-center rounded-md border border-black/30 bg-background px-5 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-secondary"
-          >
-            Contact Us
-          </button>
           <button
             type="button"
             onClick={() => setCalendlyOpen(true)}
@@ -292,6 +299,8 @@ export function Navbar() {
                 <a
                   key={l.label}
                   href={l.href}
+                  target={l.href.startsWith("http") ? "_blank" : undefined}
+                  rel={l.href.startsWith("http") ? "noreferrer" : undefined}
                   onClick={() => setOpen(false)}
                   className="rounded-md px-2 py-2 text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-primary"
                 >
@@ -311,6 +320,8 @@ export function Navbar() {
                 <a
                   key={l.label}
                   href={l.href}
+                  target={l.href.startsWith("http") ? "_blank" : undefined}
+                  rel={l.href.startsWith("http") ? "noreferrer" : undefined}
                   onClick={() => setOpen(false)}
                   className="rounded-md px-2 py-2 text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-primary"
                 >
@@ -358,16 +369,6 @@ export function Navbar() {
               type="button"
               onClick={() => {
                 setOpen(false);
-                setContactOpen(true);
-              }}
-              className="inline-flex h-10 cursor-pointer items-center justify-center rounded-md border border-border bg-background px-5 text-sm font-semibold text-foreground"
-            >
-              Contact Us
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
                 setCalendlyOpen(true);
               }}
               className="inline-flex h-10 cursor-pointer items-center justify-center rounded-md border border-primary/40 bg-background px-5 text-sm font-semibold text-primary"
@@ -379,7 +380,6 @@ export function Navbar() {
       )}
       </header>
 
-      {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
       {calendlyOpen && <CalendlyModal onClose={() => setCalendlyOpen(false)} />}
     </>
   );
@@ -427,138 +427,6 @@ function CalendlyModal({ onClose }: { onClose: () => void }) {
           data-url="https://calendly.com/taegooc50?hide_landing_page_details=1&hide_gdpr_banner=1"
           style={{ minWidth: 320, height: 700 }}
         />
-      </div>
-    </div>
-  );
-}
-
-function ContactModal({ onClose }: { onClose: () => void }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setSubmitting(true);
-    setError("");
-
-    const formData = new FormData(event.currentTarget);
-    const payload = {
-      name: String(formData.get("name") ?? ""),
-      email: String(formData.get("email") ?? ""),
-      phone: String(formData.get("phone") ?? ""),
-      message: String(formData.get("message") ?? ""),
-    };
-
-    try {
-      const res = await fetch("/api/public/submit-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        setError("Something went wrong submitting your message. Please try again.");
-        return;
-      }
-
-      setSubmitted(true);
-    } catch {
-      setError("Something went wrong submitting your message. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/45 px-5 py-8 backdrop-blur-sm"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="contact-title"
-      onMouseDown={onClose}
-    >
-      <div
-        className="w-full max-w-xl rounded-xl border border-black/20 bg-white p-6 text-foreground md:p-8"
-        onMouseDown={(event) => event.stopPropagation()}
-      >
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h2 id="contact-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
-              Contact Us
-            </h2>
-            <p className="mt-2 text-base leading-relaxed text-black">
-              Send us a message and our team will get back to you shortly.
-            </p>
-          </div>
-          <button
-            type="button"
-            aria-label="Close contact form"
-            onClick={onClose}
-            className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-md text-foreground transition-colors hover:bg-secondary"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        </div>
-
-        {submitted ? (
-          <div className="mt-8 rounded-lg border border-primary/25 bg-primary/10 p-5 text-base font-medium text-foreground">
-            Thank you. Your message has been submitted.
-          </div>
-        ) : (
-          <form
-            className="mt-8 grid gap-5"
-            onSubmit={handleSubmit}
-          >
-            <label className="grid gap-2 text-sm font-semibold text-foreground">
-              Name
-              <input
-                name="name"
-                type="text"
-                required
-                className="h-11 rounded-md border border-black/30 bg-white px-4 text-base font-normal outline-none transition-colors focus:border-primary"
-              />
-            </label>
-
-            <label className="grid gap-2 text-sm font-semibold text-foreground">
-              Email
-              <input
-                name="email"
-                type="email"
-                required
-                className="h-11 rounded-md border border-black/30 bg-white px-4 text-base font-normal outline-none transition-colors focus:border-primary"
-              />
-            </label>
-
-            <label className="grid gap-2 text-sm font-semibold text-foreground">
-              Phone
-              <input
-                name="phone"
-                type="tel"
-                className="h-11 rounded-md border border-black/30 bg-white px-4 text-base font-normal outline-none transition-colors focus:border-primary"
-              />
-            </label>
-
-            <label className="grid gap-2 text-sm font-semibold text-foreground">
-              Message
-              <textarea
-                name="message"
-                required
-                rows={5}
-                className="resize-none rounded-md border border-black/30 bg-white px-4 py-3 text-base font-normal outline-none transition-colors focus:border-primary"
-              />
-            </label>
-
-            <button
-              type="submit"
-              disabled={submitting}
-              className="inline-flex h-11 cursor-pointer items-center justify-center rounded-md bg-primary px-6 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              {submitting ? "Submitting..." : "Submit"}
-            </button>
-            {error && <p className="text-sm font-medium text-destructive">{error}</p>}
-          </form>
-        )}
       </div>
     </div>
   );

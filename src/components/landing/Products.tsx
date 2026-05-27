@@ -1,6 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
 import l2ChargerImage from "@/assets/l2charger.webp";
-import l3ChargerImage from "@/assets/ev_charger.png";
+import l3ChargerImage from "@/assets/l3.png";
 
 const PRODUCTS = {
   l2: {
@@ -50,17 +50,33 @@ function ProductCard({
   product: (typeof PRODUCTS)[keyof typeof PRODUCTS];
 }) {
   const isBadgeEmerald = product.badge === "L2";
+  const isL3 = product.badge === "L3";
   const badgeBg = isBadgeEmerald ? "#ECFDF5" : "#EFF6FF";
   const badgeText = isBadgeEmerald ? "#065F46" : "#1E40AF";
 
   return (
     <div className="overflow-hidden rounded-2xl border border-neutral-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative flex aspect-video items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200 px-4 text-center">
-        <img
-          src={product.image}
-          alt={product.imageAlt}
-          className="absolute inset-0 h-full w-full object-contain p-6"
-        />
+      <div
+        className="relative flex aspect-video items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200 px-4 text-center"
+        style={
+          isL3
+            ? {
+                backgroundImage: `url(${product.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }
+            : undefined
+        }
+        role={isL3 ? "img" : undefined}
+        aria-label={isL3 ? product.imageAlt : undefined}
+      >
+        {!isL3 && (
+          <img
+            src={product.image}
+            alt={product.imageAlt}
+            className="absolute inset-0 h-full w-full object-contain p-6"
+          />
+        )}
       </div>
 
       <div className="p-6 md:p-7">

@@ -11,18 +11,24 @@ const FROM_DOMAIN = 'notify.buildwithfif.com'
 const TEMPLATE_NAME = 'application-submission'
 
 const submissionSchema = z.object({
+  organization: z.string().trim().max(160).optional(),
   firstName: z.string().trim().min(1).max(80),
   lastName: z.string().trim().min(1).max(80),
   email: z.string().trim().email().max(160),
   phone: z.string().trim().min(7).max(30),
-  address: z.string().trim().min(3).max(200),
+  chargingStationLocation: z.string().trim().max(200).optional(),
+  estimatedTraffic: z.string().trim().max(120).optional(),
+  expectedChargingHours: z.string().trim().max(120).optional(),
   audience: z.enum(['residents', 'customers_employees', 'public']).optional(),
-  propertyType: z.enum([
-    'strata_corporations',
-    'multi_unit_residence',
-    'commercial_building',
-  ]),
+  propertyType: z
+    .enum([
+      'strata_corporations',
+      'multi_unit_residence',
+      'commercial_building',
+    ])
+    .optional(),
   message: z.string().trim().max(1000).optional(),
+  consent: z.literal(true),
 })
 
 function generateToken(): string {
@@ -60,30 +66,6 @@ export const Route = createFileRoute('/api/public/submit-application')({
 
         const data = parsed.data
         const supabase = createClient(supabaseUrl, supabaseServiceKey)
-
-        // --- 1. Persist the lead first ---
-        // This is the system of record. If email fails later, the lead is safe.
-        const { data: application, error: insertError } = await supabase
-          .from('applications')
-          .insert({
-            first_name: data.firstName,
-            last_name: data.lastName,
-            email: data.email,
-            phone: data.phone,
-            address: data.address,
-            audience: data.audience ?? null,
-            property_type: data.propertyType,
-            message: data.message ?? null,
-          })
-          .select('id')
-          .single()
-
-        if (insertError || !application) {
-          console.error('Failed to save application', insertError)
-          return Response.json({ error: 'Failed to submit application' }, { status: 500 })
-        }
-
-        // --- 2. Send notification email ---
         const template = TEMPLATES[TEMPLATE_NAME]
         const recipient = template.to!
         const normalizedRecipient = recipient.toLowerCase()
@@ -96,7 +78,6 @@ export const Route = createFileRoute('/api/public/submit-application')({
         const messageId = crypto.randomUUID()
         const idempotencyKey = `application-${messageId}`
 
-        // Ensure unsubscribe token exists (one per email)
         let unsubscribeToken: string
         const { data: existingToken } = await supabase
           .from('email_unsubscribe_tokens')
@@ -122,7 +103,6 @@ export const Route = createFileRoute('/api/public/submit-application')({
           if (stored) unsubscribeToken = stored.token
         }
 
-        // Render email
         const element = React.createElement(template.component, templateData)
         const html = await render(element)
         const plainText = await render(element, { plainText: true })
@@ -157,7 +137,6 @@ export const Route = createFileRoute('/api/public/submit-application')({
         })
 
         if (enqueueError) {
-          // Lead is already saved — log the email failure but don't surface it as an error.
           console.error('Failed to enqueue application email', enqueueError)
           await supabase.from('email_send_log').insert({
             message_id: messageId,
@@ -166,12 +145,7 @@ export const Route = createFileRoute('/api/public/submit-application')({
             status: 'failed',
             error_message: 'Failed to enqueue email',
           })
-        } else {
-          // Link the email message back to the application row for easy cross-referencing.
-          await supabase
-            .from('applications')
-            .update({ email_message_id: messageId })
-            .eq('id', application.id)
+          return Response.json({ error: 'Failed to submit application' }, { status: 500 })
         }
 
         return Response.json({ success: true })

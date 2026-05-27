@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle2, PlugZap } from "lucide-react";
 
-import productL3 from "@/assets/product-l3.png";
+import productL3 from "@/assets/l3.png";
 import { Footer } from "@/components/landing/Footer";
 import { Navbar } from "@/components/landing/Navbar";
 
@@ -66,11 +66,11 @@ function L3FastDcEvChargerPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-center rounded-2xl border border-[#C6E0CE] bg-[#D8EEE0] p-8">
+            <div className="flex items-center justify-center overflow-hidden rounded-2xl border border-[#C6E0CE] bg-[#D8EEE0] p-8">
               <img
                 src={productL3}
                 alt="L3 DC Fast EV Charger"
-                className="max-h-[420px] w-full object-contain"
+                className="max-h-[350px] w-full scale-110 object-contain"
               />
             </div>
           </div>

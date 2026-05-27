@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import heroChargerBackground from "@/assets/hero-charger-background.jpg";
+import heroBackground from "@/assets/hero.png";
 
 export function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,9 +11,9 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden bg-[#F8FAFC] bg-cover bg-[70%_center] md:bg-center"
+      className="relative overflow-hidden bg-[#F8FAFC] bg-cover bg-[70%_center] bg-no-repeat md:bg-center"
       style={{
-        backgroundImage: `linear-gradient(to right, rgba(248, 250, 252, 0.96) 0%, rgba(248, 250, 252, 0.78) 36%, rgba(248, 250, 252, 0.18) 72%), url(${heroChargerBackground})`,
+        backgroundImage: `url(${heroBackground})`,
       }}
     >
       <div className="mx-auto flex min-h-[90vh] max-w-7xl items-center px-5 py-24 md:px-8 md:py-28">
@@ -24,7 +24,7 @@ export function Hero() {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            Effortless EV charging, now with{" "}
+            EV charging stations, now with{" "}
             <span
               className="inline"
               style={{

@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2, Check } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -21,31 +20,27 @@ import { cn } from "@/lib/utils";
 const inputClass =
   "border-2 border-muted-foreground/30 bg-secondary focus-visible:border-primary focus-visible:bg-card";
 
-const propertyTypeOptions = [
-  { value: "strata_corporations", label: "Strata Corporations" },
-  { value: "multi_unit_residence", label: "Multi-Unit Residence" },
-  { value: "commercial_building", label: "Commercial Building" },
-] as const;
-
 const schema = z.object({
+  organization: z.string().trim().max(160, "Organization must be 160 characters or less"),
   firstName: z.string().trim().min(1, "First name is required").max(80),
   lastName: z.string().trim().min(1, "Last name is required").max(80),
   email: z.string().trim().email("Enter a valid email").max(160),
   phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
-  address: z
+  chargingStationLocation: z
     .string()
     .trim()
-    .min(3, "Enter the parking space address")
-    .max(200),
-  propertyType: z.enum(
-    ["strata_corporations", "multi_unit_residence", "commercial_building"],
-    {
-      required_error: "Select a property type",
-    },
-  ),
+    .max(200, "Location must be 200 characters or less"),
+  estimatedTraffic: z
+    .string()
+    .trim()
+    .max(120, "Estimated traffic must be 120 characters or less"),
+  expectedChargingHours: z
+    .string()
+    .trim()
+    .max(120, "Expected charging hours must be 120 characters or less"),
   message: z.string().trim().max(1000, "Message must be 1,000 characters or less"),
   consent: z.literal(true, {
-    errorMap: () => ({ message: "Consent is required" }),
+    errorMap: () => ({ message: "Consent is required to submit the application" }),
   }),
 });
 
@@ -57,23 +52,24 @@ export function Application() {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
+      organization: "",
       firstName: "",
       lastName: "",
       email: "",
       phone: "",
-      address: "",
-      propertyType: undefined as unknown as FormValues["propertyType"],
+      chargingStationLocation: "",
+      estimatedTraffic: "",
+      expectedChargingHours: "",
       message: "",
-      consent: false as unknown as true,
+      consent: false,
     },
   });
 
   const onSubmit = async (values: FormValues) => {
-    const { consent: _consent, ...payload } = values;
     const res = await fetch("/api/public/submit-application", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(values),
     });
     if (!res.ok) {
       form.setError("root", {
@@ -135,6 +131,30 @@ export function Application() {
                 className="space-y-10"
                 noValidate
               >
+                <div className="space-y-5">
+                  <h3 className="text-xl font-semibold text-[#12141A]">
+                    Organization
+                  </h3>
+
+                  <FormField
+                    control={form.control}
+                    name="organization"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Company name</FormLabel>
+                        <FormControl>
+                          <Input
+                            className={inputClass}
+                            placeholder="Company, strata, or property name"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
                 <div className="grid gap-10 md:grid-cols-2">
                   {/* Contact Information */}
                   <div className="space-y-5">
@@ -207,24 +227,22 @@ export function Application() {
                   </div>
 
                   {/* Parking Lot Information */}
-                  <div className="space-y-6">
+                  <div className="space-y-5">
                     <h3 className="text-xl font-semibold text-[#12141A]">
                       Parking Lot Information
                     </h3>
 
                     <FormField
                       control={form.control}
-                      name="address"
+                      name="chargingStationLocation"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>
-                            Address of parking space
-                          </FormLabel>
+                          <FormLabel>Location of EV charging station</FormLabel>
                           <FormControl>
                             <Input
                               className={inputClass}
                               type="text"
-                              placeholder="123 Main St, Vancouver, BC"
+                              placeholder="Near visitor parking, parkade level P1, etc."
                               {...field}
                             />
                           </FormControl>
@@ -235,39 +253,42 @@ export function Application() {
 
                     <FormField
                       control={form.control}
-                      name="propertyType"
+                      name="estimatedTraffic"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Type of Property</FormLabel>
+                          <FormLabel>Estimated number of traffic</FormLabel>
                           <FormControl>
-                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-                              {propertyTypeOptions.map((opt) => {
-                                const selected = field.value === opt.value;
-                                return (
-                                  <button
-                                    type="button"
-                                    key={opt.value}
-                                    onClick={() => field.onChange(opt.value)}
-                                    className={cn(
-                                      "relative min-h-16 text-left rounded-lg border-2 px-3 py-3 text-sm transition-colors",
-                                      selected
-                                        ? "border-primary bg-primary/15 text-primary font-medium"
-                                        : "border-muted-foreground/30 bg-secondary text-foreground hover:border-primary hover:bg-primary/5",
-                                    )}
-                                  >
-                                    {selected && (
-                                      <Check className="absolute top-2 right-2 h-4 w-4 text-primary" />
-                                    )}
-                                    {opt.label}
-                                  </button>
-                                );
-                              })}
-                            </div>
+                            <Input
+                              className={inputClass}
+                              type="text"
+                              placeholder="Example: 50 vehicles per day"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+
+                    <FormField
+                      control={form.control}
+                      name="expectedChargingHours"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Expected charging hours per day</FormLabel>
+                          <FormControl>
+                            <Input
+                              className={inputClass}
+                              type="text"
+                              placeholder="Example: 6-8 hours per day"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
                   </div>
                 </div>
 
@@ -293,20 +314,25 @@ export function Application() {
                   control={form.control}
                   name="consent"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start gap-3 space-y-0 rounded-lg border border-neutral-300 bg-secondary/40 p-4">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-snug">
-                        <FormLabel className="text-sm font-normal text-foreground">
-                          I agree to be contacted by UbiqPower regarding this
-                          application. Approval is subject to site qualification
-                          and agreement.
-                        </FormLabel>
-                        <FormMessage />
+                    <FormItem>
+                      <div className="flex items-start gap-3 rounded-lg border border-muted-foreground/20 bg-secondary/60 p-4">
+                        <FormControl>
+                          <input
+                            type="checkbox"
+                            checked={field.value}
+                            onChange={(event) => field.onChange(event.target.checked)}
+                            onBlur={field.onBlur}
+                            name={field.name}
+                            ref={field.ref}
+                            className="mt-1 h-4 w-4 cursor-pointer rounded border-muted-foreground/40 accent-primary"
+                          />
+                        </FormControl>
+                        <div className="space-y-1">
+                          <FormLabel className="cursor-pointer text-sm font-medium leading-relaxed text-[#12141A]">
+                            I consent to UbiqPower contacting me about this application.
+                          </FormLabel>
+                          <FormMessage />
+                        </div>
                       </div>
                     </FormItem>
                   )}

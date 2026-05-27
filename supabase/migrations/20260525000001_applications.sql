@@ -4,13 +4,17 @@
 
 CREATE TABLE IF NOT EXISTS public.applications (
   id               UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization     TEXT,
   first_name       TEXT        NOT NULL,
   last_name        TEXT        NOT NULL,
   email            TEXT        NOT NULL,
   phone            TEXT        NOT NULL,
-  address          TEXT        NOT NULL,
+  address          TEXT,
+  charging_station_location TEXT,
+  estimated_traffic TEXT,
+  expected_charging_hours TEXT,
   audience         TEXT        CHECK (audience IN ('residents', 'customers_employees', 'public')),
-  property_type    TEXT        NOT NULL CHECK (property_type IN ('strata_corporations', 'multi_unit_residence', 'commercial_building')),
+  property_type    TEXT        CHECK (property_type IN ('strata_corporations', 'multi_unit_residence', 'commercial_building')),
   message          TEXT,
   email_message_id TEXT,
   submitted_at     TIMESTAMPTZ NOT NULL DEFAULT now()

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle2, PlugZap } from "lucide-react";
 
-import productL2 from "@/assets/product-l2.png";
+import productL2 from "@/assets/l2charger.webp";
 import { Footer } from "@/components/landing/Footer";
 import { Navbar } from "@/components/landing/Navbar";
 
@@ -35,7 +35,7 @@ function L2EvChargerPage() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        <section className="bg-[#EBF5EF] py-16 md:py-24">
+        <section className="bg-[#D8EEE0] py-16 md:py-24">
           <div className="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[minmax(0,1fr)_minmax(320px,0.85fr)] md:px-8">
             <div className="flex flex-col justify-center">
               <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
@@ -66,7 +66,7 @@ function L2EvChargerPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-center rounded-2xl border border-[#C6E0CE] bg-[#D8EEE0] p-8">
+            <div className="flex items-center justify-center rounded-2xl border border-[#B8D7C3] bg-white/35 p-8">
               <img
                 src={productL2}
                 alt="L2 EV Charger"

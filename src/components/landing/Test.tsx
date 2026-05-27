@@ -129,8 +129,7 @@ export function Test() {
                 ${animatedValue.toLocaleString("en-US")}
               </p>
               <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600 md:text-2xl">
-                No capital investment. No project risk. We handle everything from
-                start to finish
+                No capital investment. No project risk. We handle everything from start to finish
               </p>
             </div>
 
@@ -143,10 +142,7 @@ export function Test() {
               }}
             >
               {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex justify-center"
-                >
+                <div key={stat.label} className="flex justify-center">
                   <div className="w-fit min-w-[14rem] border-l-2 border-[#2D865B] pl-7 text-left md:min-w-[16rem] md:pl-10">
                     <p className="text-5xl font-semibold leading-none tracking-tight text-slate-950 md:text-6xl lg:text-7xl">
                       {stat.value}

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { CheckCircle2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -15,42 +14,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { applicationSchema, type ApplicationFormValues } from "@/lib/application-schema";
 import { cn } from "@/lib/utils";
+import { submitApplication } from "@/server-functions/application";
 
 const inputClass =
   "border-2 border-muted-foreground/30 bg-secondary focus-visible:border-primary focus-visible:bg-card";
 
-const schema = z.object({
-  organization: z.string().trim().max(160, "Organization must be 160 characters or less"),
-  firstName: z.string().trim().min(1, "First name is required").max(80),
-  lastName: z.string().trim().min(1, "Last name is required").max(80),
-  email: z.string().trim().email("Enter a valid email").max(160),
-  phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
-  chargingStationLocation: z
-    .string()
-    .trim()
-    .max(200, "Location must be 200 characters or less"),
-  estimatedTraffic: z
-    .string()
-    .trim()
-    .max(120, "Estimated traffic must be 120 characters or less"),
-  expectedChargingHours: z
-    .string()
-    .trim()
-    .max(120, "Expected charging hours must be 120 characters or less"),
-  message: z.string().trim().max(1000, "Message must be 1,000 characters or less"),
-  consent: z.literal(true, {
-    errorMap: () => ({ message: "Consent is required to submit the application" }),
-  }),
-});
-
-type FormValues = z.infer<typeof schema>;
-
 export function Application() {
   const [submitted, setSubmitted] = useState(false);
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
+  const form = useForm<ApplicationFormValues>({
+    resolver: zodResolver(applicationSchema),
     defaultValues: {
       organization: "",
       firstName: "",
@@ -65,19 +40,17 @@ export function Application() {
     },
   });
 
-  const onSubmit = async (values: FormValues) => {
-    const res = await fetch("/api/public/submit-application", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
-    if (!res.ok) {
+  const onSubmit = async (values: ApplicationFormValues) => {
+    try {
+      await submitApplication({ data: values });
+      setSubmitted(true);
+    } catch (error) {
+      console.error(error);
       form.setError("root", {
-        message: "Something went wrong submitting your application. Please try again.",
+        message:
+          "We could not send your application right now. Please try again or email us directly.",
       });
-      return;
     }
-    setSubmitted(true);
   };
 
   return (
@@ -85,8 +58,7 @@ export function Application() {
       id="apply"
       className="relative py-20 md:py-28"
       style={{
-        background:
-          "linear-gradient(180deg, #2D865B 0%, #5BAA84 35%, #C9E2D5 70%, #FAFCFD 100%)",
+        background: "linear-gradient(180deg, #2D865B 0%, #5BAA84 35%, #C9E2D5 70%, #FAFCFD 100%)",
       }}
     >
       <div className="mx-auto max-w-[1380px] px-6">
@@ -95,8 +67,8 @@ export function Application() {
             Apply for the Zero Cost EV Charger Program
           </h2>
           <p className="mt-4 text-white/90 max-w-2xl mx-auto">
-            Tell us about your property and we'll follow up with next steps —
-            subject to site qualification and agreement approval.
+            Tell us about your property and we'll follow up with next steps — subject to site
+            qualification and agreement approval.
           </p>
         </div>
 
@@ -106,12 +78,10 @@ export function Application() {
               <div className="rounded-full bg-primary/10 p-4 mb-5">
                 <CheckCircle2 className="h-10 w-10 text-primary" />
               </div>
-              <h3 className="text-2xl font-semibold text-[#12141A] mb-3">
-                Application received
-              </h3>
+              <h3 className="text-2xl font-semibold text-[#12141A] mb-3">Application received</h3>
               <p className="text-muted-foreground max-w-md">
-                Thank you for applying. The UbiqPower team will review your
-                information and contact you about the next steps.
+                Thank you for applying. The UbiqPower team will review your information and contact
+                you about the next steps.
               </p>
               <Button
                 variant="ghost"
@@ -126,15 +96,9 @@ export function Application() {
             </div>
           ) : (
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-10"
-                noValidate
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10" noValidate>
                 <div className="space-y-5">
-                  <h3 className="text-xl font-semibold text-[#12141A]">
-                    Organization
-                  </h3>
+                  <h3 className="text-xl font-semibold text-[#12141A]">Organization</h3>
 
                   <FormField
                     control={form.control}
@@ -158,9 +122,7 @@ export function Application() {
                 <div className="grid gap-10 md:grid-cols-2">
                   {/* Contact Information */}
                   <div className="space-y-5">
-                    <h3 className="text-xl font-semibold text-[#12141A]">
-                      Contact Information
-                    </h3>
+                    <h3 className="text-xl font-semibold text-[#12141A]">Contact Information</h3>
 
                     <FormField
                       control={form.control}
@@ -288,7 +250,6 @@ export function Application() {
                         </FormItem>
                       )}
                     />
-
                   </div>
                 </div>
 
@@ -340,9 +301,7 @@ export function Application() {
 
                 <div className="flex flex-col items-end gap-3">
                   {form.formState.errors.root && (
-                    <p className="text-sm text-destructive">
-                      {form.formState.errors.root.message}
-                    </p>
+                    <p className="text-sm text-destructive">{form.formState.errors.root.message}</p>
                   )}
                   <Button
                     type="submit"
@@ -350,9 +309,7 @@ export function Application() {
                     className="w-full md:w-auto"
                     disabled={form.formState.isSubmitting}
                   >
-                    {form.formState.isSubmitting
-                      ? "Submitting..."
-                      : "Submit Application"}
+                    {form.formState.isSubmitting ? "Submitting..." : "Submit Application"}
                   </Button>
                 </div>
               </form>

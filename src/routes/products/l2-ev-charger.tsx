@@ -46,9 +46,8 @@ function L2EvChargerPage() {
                 L2 EV Charger
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg">
-                A 32A Level 2 charging solution built for reliable everyday EV
-                charging in residential, commercial, workplace, and shared
-                parking environments.
+                A 32A Level 2 charging solution built for reliable everyday EV charging in
+                residential, commercial, workplace, and shared parking environments.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -94,9 +93,7 @@ function L2EvChargerPage() {
                   className="flex gap-3 rounded-xl border border-neutral-200 bg-white p-5 shadow-sm"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                  <p className="text-sm leading-relaxed text-neutral-700 md:text-base">
-                    {spec}
-                  </p>
+                  <p className="text-sm leading-relaxed text-neutral-700 md:text-base">{spec}</p>
                 </div>
               ))}
             </div>

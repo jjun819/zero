@@ -9,21 +9,16 @@ const productLinks = [
   { href: "#products", label: "Reuse of EV Battery Power" },
 ];
 
-const serviceLinks = [
-  { href: "https://foreseeson-evse.com/", label: "Installation" },
-];
+const serviceLinks = [{ href: "https://foreseeson-evse.com/", label: "Installation" }];
 
 const zeroCostLinks = [
   { href: "#solutions", label: "Residential" },
   { href: "#solutions", label: "Commercial" },
 ];
 
-const footerHeadingClass =
-  "text-sm font-bold uppercase tracking-[0.18em] text-white";
-const footerLinkClass =
-  "font-medium text-[#A7B0B2] transition-colors hover:text-[#20B2AA]";
-const footerParentLinkClass =
-  "font-semibold text-[#A7B0B2] transition-colors hover:text-[#20B2AA]";
+const footerHeadingClass = "text-sm font-bold uppercase tracking-[0.18em] text-white";
+const footerLinkClass = "font-medium text-[#A7B0B2] transition-colors hover:text-[#20B2AA]";
+const footerParentLinkClass = "font-semibold text-[#A7B0B2] transition-colors hover:text-[#20B2AA]";
 
 export function Footer() {
   return (
@@ -32,19 +27,12 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
             <div className="flex items-center gap-2">
-              <img
-                src={logo}
-                alt="UbiqPower"
-                className="h-10 w-auto object-contain"
-              />
-              <span className="text-lg font-bold tracking-tight">
-                UbiqPower
-              </span>
+              <img src={logo} alt="UbiqPower" className="h-10 w-auto object-contain" />
+              <span className="text-lg font-bold tracking-tight">UbiqPower</span>
             </div>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-[#A7B0B2]">
-              Zero Cost EV Charger Program — turnkey EV charging for strata
-              corporations, multi-unit residential, commercial, and retail
-              properties.
+              Zero Cost EV Charger Program — turnkey EV charging for strata corporations, multi-unit
+              residential, commercial, and retail properties.
             </p>
 
             <a
@@ -56,9 +44,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <h4 className={footerHeadingClass}>
-              Product
-            </h4>
+            <h4 className={footerHeadingClass}>Product</h4>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <a href="#products" className={footerParentLinkClass}>
@@ -81,9 +67,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <h4 className={footerHeadingClass}>
-              Services
-            </h4>
+            <h4 className={footerHeadingClass}>Services</h4>
             <ul className="mt-4 space-y-3 text-sm">
               {serviceLinks.map((link) => (
                 <li key={link.label}>
@@ -101,9 +85,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <h4 className={footerHeadingClass}>
-              Solutions
-            </h4>
+            <h4 className={footerHeadingClass}>Solutions</h4>
             <ul className="mt-4 space-y-3 text-sm">
               <li className="font-semibold text-white">Zero Cost</li>
               {zeroCostLinks.map((link) => (
@@ -117,16 +99,11 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <h4 className={footerHeadingClass}>
-              Contact
-            </h4>
+            <h4 className={footerHeadingClass}>Contact</h4>
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#20B2AA]" />
-                <a
-                  href={APPLY_HREF}
-                  className={footerLinkClass}
-                >
+                <a href={APPLY_HREF} className={footerLinkClass}>
                   Zerocostapplication@foreseeson.com
                 </a>
               </li>
@@ -152,13 +129,8 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-[rgba(255,255,255,0.08)] pt-6 text-xs text-[#A7B0B2] md:flex-row md:items-center md:justify-between">
-          <div>
-            © {new Date().getFullYear()} UbiqPower Technology Inc. All rights
-            reserved.
-          </div>
-          <div>
-            Acceptance is subject to site qualification and agreement approval.
-          </div>
+          <div>© {new Date().getFullYear()} UbiqPower Technology Inc. All rights reserved.</div>
+          <div>Acceptance is subject to site qualification and agreement approval.</div>
         </div>
       </div>
     </footer>

@@ -36,16 +36,14 @@ const APPLY_HREF = "#apply";
 
 export function HowItWorks() {
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [visibleSteps, setVisibleSteps] = useState<boolean[]>(
-    () => steps.map(() => false)
-  );
+  const [visibleSteps, setVisibleSteps] = useState<boolean[]>(() => steps.map(() => false));
 
   const handleImagePointerMove = (event: PointerEvent<HTMLDivElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - bounds.left;
     const y = event.clientY - bounds.top;
-    const rotateY = ((x / bounds.width) - 0.5) * 8;
-    const rotateX = ((0.5 - y / bounds.height) * 8);
+    const rotateY = (x / bounds.width - 0.5) * 8;
+    const rotateX = (0.5 - y / bounds.height) * 8;
 
     event.currentTarget.style.setProperty("--tilt-x", `${rotateX}deg`);
     event.currentTarget.style.setProperty("--tilt-y", `${rotateY}deg`);
@@ -78,7 +76,7 @@ export function HowItWorks() {
       {
         rootMargin: "0px 0px -12% 0px",
         threshold: 0.35,
-      }
+      },
     );
 
     stepRefs.current.forEach((step) => {
@@ -175,9 +173,7 @@ export function HowItWorks() {
                   ) : null}
 
                   <div
-                    className={`md:order-1 ${
-                      imageFirst ? revealImageClass : revealContentClass
-                    }`}
+                    className={`md:order-1 ${imageFirst ? revealImageClass : revealContentClass}`}
                     style={{ transitionDelay: imageFirst ? "0ms" : "100ms" }}
                   >
                     {imageFirst ? image : content}
@@ -191,9 +187,7 @@ export function HowItWorks() {
                   </div>
 
                   <div
-                    className={`md:order-3 ${
-                      imageFirst ? revealContentClass : revealImageClass
-                    }`}
+                    className={`md:order-3 ${imageFirst ? revealContentClass : revealImageClass}`}
                     style={{ transitionDelay: imageFirst ? "100ms" : "0ms" }}
                   >
                     {imageFirst ? content : image}

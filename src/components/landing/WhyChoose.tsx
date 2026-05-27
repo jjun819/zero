@@ -35,9 +35,9 @@ export function WhyChoose() {
             <span className="text-foreground"> Program for Property Owners.</span>{" "}
           </h2>
           <p className="mt-5 text-base text-foreground md:text-lg">
-            UbiqPower delivers turnkey EV charging solutions at Zero upfront
-            cost, turning parking spaces into monthly net profit for strata
-            corporations, commercial, and retail property owners
+            UbiqPower delivers turnkey EV charging solutions at Zero upfront cost, turning parking
+            spaces into monthly net profit for strata corporations, commercial, and retail property
+            owners
           </p>
         </div>
 
@@ -91,9 +91,7 @@ export function WhyChoose() {
                 <p className="mt-4 text-lg font-semibold leading-tight text-[#2D865B]">
                   {item.sub}
                 </p>
-                <p className="mt-5 text-base leading-relaxed text-black">
-                  {item.body}
-                </p>
+                <p className="mt-5 text-base leading-relaxed text-black">{item.body}</p>
                 {"link" in item ? (
                   <a
                     href={item.link === "Get a Free Assesment" ? "#apply" : "#"}

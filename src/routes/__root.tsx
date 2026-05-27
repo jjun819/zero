@@ -73,17 +73,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Lovable App" },
-      { name: "description", content: "UbiqPower offers zero upfront cost EV charger installation for properties, generating profit share." },
+      {
+        name: "description",
+        content:
+          "UbiqPower offers zero upfront cost EV charger installation for properties, generating profit share.",
+      },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "UbiqPower offers zero upfront cost EV charger installation for properties, generating profit share." },
+      {
+        property: "og:description",
+        content:
+          "UbiqPower offers zero upfront cost EV charger installation for properties, generating profit share.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "UbiqPower offers zero upfront cost EV charger installation for properties, generating profit share." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e07e4311-58e0-45fa-9c30-f2a4bd2aa854/id-preview-491a0649--08b41217-7b21-4903-8087-b81dc7ec7258.lovable.app-1778787439158.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e07e4311-58e0-45fa-9c30-f2a4bd2aa854/id-preview-491a0649--08b41217-7b21-4903-8087-b81dc7ec7258.lovable.app-1778787439158.png" },
+      {
+        name: "twitter:description",
+        content:
+          "UbiqPower offers zero upfront cost EV charger installation for properties, generating profit share.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e07e4311-58e0-45fa-9c30-f2a4bd2aa854/id-preview-491a0649--08b41217-7b21-4903-8087-b81dc7ec7258.lovable.app-1778787439158.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e07e4311-58e0-45fa-9c30-f2a4bd2aa854/id-preview-491a0649--08b41217-7b21-4903-8087-b81dc7ec7258.lovable.app-1778787439158.png",
+      },
     ],
     links: [
       {

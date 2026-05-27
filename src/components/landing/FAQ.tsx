@@ -42,19 +42,15 @@ export function FAQ() {
               FAQ
             </h2>
             <p className="mt-5 text-muted-foreground">
-              Common questions about the Zero Cost EV Charger Program. Reach
-              out for anything we have not covered.
+              Common questions about the Zero Cost EV Charger Program. Reach out for anything we
+              have not covered.
             </p>
           </div>
 
           <div className="lg:col-span-8">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((f, i) => (
-                <AccordionItem
-                  key={i}
-                  value={`item-${i}`}
-                  className="border-b border-neutral-300"
-                >
+                <AccordionItem key={i} value={`item-${i}`} className="border-b border-neutral-300">
                   <AccordionTrigger className="py-5 text-left text-base font-semibold text-foreground hover:no-underline md:text-lg">
                     {f.q}
                   </AccordionTrigger>

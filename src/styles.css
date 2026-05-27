@@ -46,24 +46,24 @@
   --radius: 0.875rem;
 
   /* Brand palette in oklch */
-  --background: oklch(0.992 0.003 250);              /* #FAFCFD */
-  --foreground: oklch(0.18 0.018 268);               /* #12141A */
+  --background: oklch(0.992 0.003 250); /* #FAFCFD */
+  --foreground: oklch(0.18 0.018 268); /* #12141A */
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.018 268);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.018 268);
 
-  --primary: oklch(0.55 0.118 156);                  /* #2D865B Sea Green */
+  --primary: oklch(0.55 0.118 156); /* #2D865B Sea Green */
   --primary-foreground: oklch(0.992 0.003 250);
 
-  --secondary: oklch(0.972 0.012 268);               /* #EFF2FB */
+  --secondary: oklch(0.972 0.012 268); /* #EFF2FB */
   --secondary-foreground: oklch(0.18 0.018 268);
 
-  --muted: oklch(0.93 0.018 268);                    /* #DBDFED */
-  --muted-foreground: oklch(0.46 0.026 268);         /* #545B77 */
+  --muted: oklch(0.93 0.018 268); /* #DBDFED */
+  --muted-foreground: oklch(0.46 0.026 268); /* #545B77 */
 
-  --accent: oklch(0.63 0.135 156);                   /* #39A770 Light Sea Green */
+  --accent: oklch(0.63 0.135 156); /* #39A770 Light Sea Green */
   --accent-foreground: oklch(0.992 0.003 250);
 
   --destructive: oklch(0.577 0.245 27.325);
@@ -74,14 +74,14 @@
   --ring: oklch(0.55 0.118 156);
 
   /* Brand-specific tokens */
-  --brand-dark: oklch(0.18 0.018 268);               /* #12141A Chinese Black */
-  --brand-accent: oklch(0.72 0.155 178);             /* #04BBA6 */
-  --brand-accent-bright: oklch(0.84 0.18 178);       /* #1EDDC7 */
-  --brand-surface: oklch(0.972 0.012 268);           /* #EFF2FB Cornflower */
-  --brand-soft: oklch(0.93 0.018 268);               /* #DBDFED Icelandic Winds */
+  --brand-dark: oklch(0.18 0.018 268); /* #12141A Chinese Black */
+  --brand-accent: oklch(0.72 0.155 178); /* #04BBA6 */
+  --brand-accent-bright: oklch(0.84 0.18 178); /* #1EDDC7 */
+  --brand-surface: oklch(0.972 0.012 268); /* #EFF2FB Cornflower */
+  --brand-soft: oklch(0.93 0.018 268); /* #DBDFED Icelandic Winds */
 
-  --gradient-sea: linear-gradient(135deg, #2D865B 0%, #04BBA6 100%);
-  --gradient-sea-soft: linear-gradient(135deg, #2D865B33 0%, #04BBA61a 100%);
+  --gradient-sea: linear-gradient(135deg, #2d865b 0%, #04bba6 100%);
+  --gradient-sea-soft: linear-gradient(135deg, #2d865b33 0%, #04bba61a 100%);
 }
 
 @layer base {

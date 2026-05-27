@@ -46,9 +46,8 @@ function L3FastDcEvChargerPage() {
                 L3 DC Fast EV Charger
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg">
-                A high-speed DC charging solution designed for outdoor,
-                high-traffic locations where drivers need faster charging and
-                reliable access.
+                A high-speed DC charging solution designed for outdoor, high-traffic locations where
+                drivers need faster charging and reliable access.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -83,8 +82,7 @@ function L3FastDcEvChargerPage() {
                 Charger specifications
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-600 md:text-lg">
-                Core features and technical details for the L3 DC Fast EV
-                Charger.
+                Core features and technical details for the L3 DC Fast EV Charger.
               </p>
             </div>
 
@@ -95,9 +93,7 @@ function L3FastDcEvChargerPage() {
                   className="flex gap-3 rounded-xl border border-neutral-200 bg-white p-5 shadow-sm"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                  <p className="text-sm leading-relaxed text-neutral-700 md:text-base">
-                    {spec}
-                  </p>
+                  <p className="text-sm leading-relaxed text-neutral-700 md:text-base">{spec}</p>
                 </div>
               ))}
             </div>

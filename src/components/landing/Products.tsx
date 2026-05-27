@@ -12,11 +12,7 @@ const PRODUCTS = {
     href: "/products/l2-ev-charger",
     description:
       "Ideal for residential, commercial, and workplace charging. 8-12 hour sessions, perfect for overnight or workday parking.",
-    specs: [
-      "7.7 kW output",
-      "OCPP 1.6 compatible",
-      "Networked + local billing",
-    ],
+    specs: ["7.7 kW output", "OCPP 1.6 compatible", "Networked + local billing"],
   },
   l3: {
     badge: "L3",
@@ -27,11 +23,7 @@ const PRODUCTS = {
     href: "/products/l3-fast-dc-ev-charger",
     description:
       "High-speed charging for public and high-traffic locations. 20-45 minute sessions, ideal for retail plazas and highway corridors.",
-    specs: [
-      "180 kW output",
-      "CCS + CHAdeMO connectors",
-      "Premium revenue per session",
-    ],
+    specs: ["180 kW output", "CCS + CHAdeMO connectors", "Premium revenue per session"],
   },
 };
 
@@ -44,11 +36,7 @@ function SpecItem({ text }: { text: string }) {
   );
 }
 
-function ProductCard({
-  product,
-}: {
-  product: (typeof PRODUCTS)[keyof typeof PRODUCTS];
-}) {
+function ProductCard({ product }: { product: (typeof PRODUCTS)[keyof typeof PRODUCTS] }) {
   const isBadgeEmerald = product.badge === "L2";
   const isL3 = product.badge === "L3";
   const badgeBg = isBadgeEmerald ? "#ECFDF5" : "#EFF6FF";
@@ -96,9 +84,7 @@ function ProductCard({
           {product.name}
         </h3>
 
-        <p className="mb-4 text-sm leading-relaxed text-black">
-          {product.description}
-        </p>
+        <p className="mb-4 text-sm leading-relaxed text-black">{product.description}</p>
 
         <ul className="mb-6 space-y-2">
           {product.specs.map((spec) => (
@@ -135,8 +121,8 @@ export function Products() {
             Everything you need to go live.
           </h2>
           <p className="text-base leading-relaxed text-black md:text-lg">
-            From L2 chargers for daily use to L3 fast DC for high-traffic
-            properties, choose the hardware that fits your charging needs.
+            From L2 chargers for daily use to L3 fast DC for high-traffic properties, choose the
+            hardware that fits your charging needs.
           </p>
         </div>
 

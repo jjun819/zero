@@ -16,8 +16,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title:
-          "UbiqPower Zero Cost EV Charger Program | Turnkey EV Charging for Properties",
+        title: "UbiqPower Zero Cost EV Charger Program | Turnkey EV Charging for Properties",
       },
       {
         name: "description",

@@ -38,7 +38,6 @@ export function Hero() {
             >
               Zero Cost.
             </span>{" "}
-            
           </h1>
 
           <p
@@ -73,7 +72,6 @@ export function Hero() {
             </a>
           </div>
         </div>
-
       </div>
 
       <style>{`

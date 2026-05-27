@@ -17,7 +17,8 @@ export function Qualifications() {
             Eligibility
           </h2>
           <p className="mt-4 text-base text-muted-foreground md:text-lg">
-            UbiqPower works with property owners and agreement holders who are ready to add EV charging infrastructure without upfront investment.
+            UbiqPower works with property owners and agreement holders who are ready to add EV
+            charging infrastructure without upfront investment.
           </p>
         </div>
 
@@ -27,13 +28,8 @@ export function Qualifications() {
               key={p}
               className="flex items-start gap-3 rounded-2xl border border-neutral-300 bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md"
             >
-              <CheckCircle2
-                className="mt-0.5 h-5 w-5 flex-shrink-0"
-                style={{ color: "#2D865B" }}
-              />
-              <span className="text-sm leading-relaxed text-foreground">
-                {p}
-              </span>
+              <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0" style={{ color: "#2D865B" }} />
+              <span className="text-sm leading-relaxed text-foreground">{p}</span>
             </li>
           ))}
         </ul>

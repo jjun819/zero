@@ -57,9 +57,7 @@ export function Value() {
                   <h3 className="text-base font-semibold leading-tight text-foreground">
                     {item.title}
                   </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {item.text}
-                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
                 </div>
               </article>
             );

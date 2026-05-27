@@ -6,7 +6,7 @@ import tenantImage from "@/assets/tenant.png";
 const valueItems = [
   {
     title: "Create new revenue from existing parking",
-    text: "Turn qualified stalls into charging income without adding equipment, installation, or management costs to your budget.",
+    text: "Earn 10% of monthly net profit from charging activity while UbiqPower handles the equipment, installation, and management.",
     image: officeBuilding,
     alt: "Commercial property parking area",
   },
@@ -24,7 +24,7 @@ const valueItems = [
   },
   {
     title: "Environmental impact",
-    text: "Once chargers are live, the property owner or agreement holder receives 10% of monthly net profit automatically.",
+    text: "Support cleaner transportation with EV chargers that help reduce emissions and make your property part of a greener future.",
     image: evCharger,
     alt: "EV charger installed at a parking space",
   },

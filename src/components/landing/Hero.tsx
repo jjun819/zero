@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import heroBackground from "@/assets/hero.png";
+import heroBackground from "@/assets/white_l3.png";
 
 export function Hero() {
   const [isVisible, setIsVisible] = useState(false);

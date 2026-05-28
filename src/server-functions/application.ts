@@ -25,6 +25,14 @@ const createSesClient = (env: ServerEnv) => {
   const accessKeyId = env.AWS_ACCESS_KEY_ID?.trim();
   const secretAccessKey = env.AWS_SECRET_ACCESS_KEY?.trim();
 
+  console.log("SES setup:", {
+    hasKey: Boolean(accessKeyId),
+    keyLength: accessKeyId?.length ?? 0,
+    hasSecret: Boolean(secretAccessKey),
+    secretLength: secretAccessKey?.length ?? 0,
+    region: env.AWS_REGION,
+  });
+
   return new SESClient({
     region: requiredEnv(env, "AWS_REGION"),
     credentials:
@@ -97,7 +105,7 @@ export const submitApplication = createServerFn({ method: "POST" })
     const fromEmail = requiredEnv(env, "SES_FROM_EMAIL");
     const toEmail = requiredEnv(env, "APPLICATION_TO_EMAIL");
     const ses = createSesClient(env);
-
+    console.log(fromEmail);
     await ses.send(
       new SendEmailCommand({
         Source: fromEmail,

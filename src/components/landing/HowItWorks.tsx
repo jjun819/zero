@@ -27,7 +27,7 @@ const steps = [
   {
     n: "04",
     img: stepCharging,
-    title: "Go Live & Start ChargingD",
+    title: "Go Live & Start Charging",
     text: "Chargers go live, EV drivers pay per charging session, and the property owner receives 10% of monthly net profit.",
   },
 ];

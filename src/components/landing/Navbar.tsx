@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -16,11 +16,27 @@ const productLinks = [
 const serviceLinks = [{ href: "https://foreseeson-evse.com/", label: "Installation" }];
 
 const zeroCostLinks = [
-  { href: "#solutions", label: "Residential" },
-  { href: "#solutions", label: "Commercial" },
+  { href: "/ubiqbrochure.pdf", label: "Residential" },
+  { href: "/ubiqbrochure.pdf", label: "Commercial" },
 ];
 
-const APPLY_HREF = "#apply";
+const APPLY_HREF = "/#apply";
+
+const goToApplicationForm = (event: MouseEvent<HTMLAnchorElement>) => {
+  event.preventDefault();
+  window.location.assign(APPLY_HREF);
+};
+
+const goToHomeTop = (event: MouseEvent<HTMLAnchorElement>) => {
+  event.preventDefault();
+
+  if (window.location.pathname === "/" && !window.location.search) {
+    window.location.reload();
+    return;
+  }
+
+  window.location.assign("/");
+};
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -47,7 +63,7 @@ export function Navbar() {
     <>
       <header className="sticky top-0 z-50 border-b border-emerald-900/10 bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/85">
         <div className="mx-auto flex h-24 max-w-[1380px] items-center px-5 pl-6 md:px-8 md:pl-16">
-          <a href="/" className="flex flex-col gap-1">
+          <a href="/" onClick={goToHomeTop} className="flex flex-col gap-1">
             <span className="flex items-center gap-3">
               <img src={logo} alt="UbiqPower" className="h-12 w-auto object-contain" />
               <span className="text-3xl font-bold tracking-tight text-foreground">
@@ -214,6 +230,8 @@ export function Navbar() {
                             <a
                               key={l.label}
                               href={l.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
                             >
                               {l.label}
@@ -238,6 +256,7 @@ export function Navbar() {
             </button>
             <a
               href={APPLY_HREF}
+              onClick={goToApplicationForm}
               className="inline-flex h-10 items-center rounded-md bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
               Apply Now
@@ -276,6 +295,8 @@ export function Navbar() {
                     <a
                       key={l.label}
                       href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={() => setOpen(false)}
                       className="rounded-md px-2 py-2 text-sm font-medium text-foreground/60 hover:bg-secondary hover:text-primary"
                     >
@@ -348,7 +369,10 @@ export function Navbar() {
               </div>
               <a
                 href={APPLY_HREF}
-                onClick={() => setOpen(false)}
+                onClick={(event) => {
+                  setOpen(false);
+                  goToApplicationForm(event);
+                }}
                 className="mt-2 inline-flex h-10 items-center justify-center rounded-md bg-primary px-5 text-sm font-semibold text-primary-foreground"
               >
                 Apply Now

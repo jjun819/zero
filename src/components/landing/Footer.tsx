@@ -19,6 +19,8 @@ const zeroCostLinks = [
 const footerHeadingClass = "text-sm font-bold uppercase tracking-[0.18em] text-white";
 const footerLinkClass = "font-medium text-[#A7B0B2] transition-colors hover:text-[#20B2AA]";
 const footerParentLinkClass = "font-semibold text-[#A7B0B2] transition-colors hover:text-[#20B2AA]";
+const legalDisclosure =
+  "Program availability, zero-upfront-cost participation, revenue share, equipment ownership, installation, maintenance, and operating terms are subject to site assessment, eligibility, utility capacity, permits, local regulations, and final written agreement. Website content is for general information only and is not a binding offer, guarantee of approval, or guarantee of revenue or savings.";
 
 export function Footer() {
   return (
@@ -56,7 +58,7 @@ export function Footer() {
                   <a
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className={footerParentLinkClass}
                   >
                     {link.label}
@@ -74,7 +76,7 @@ export function Footer() {
                   <a
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className={footerParentLinkClass}
                   >
                     {link.label}
@@ -112,7 +114,7 @@ export function Footer() {
                 <a
                   href="https://www.ubiqpower.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className={footerLinkClass}
                 >
                   www.ubiqpower.com
@@ -132,6 +134,8 @@ export function Footer() {
           <div>© {new Date().getFullYear()} UbiqPower Technology Inc. All rights reserved.</div>
           <div>Acceptance is subject to site qualification and agreement approval.</div>
         </div>
+
+        <p className="mt-5 max-w-5xl text-xs leading-relaxed text-[#879194]">{legalDisclosure}</p>
       </div>
     </footer>
   );

@@ -34,6 +34,11 @@ const stats = [
   },
 ];
 
+const titleFadeStart = 0.08;
+const titleFadeEnd = 0.28;
+const finalFadeStart = 0.86;
+const finalFadeEnd = 1;
+
 export function Test() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -69,22 +74,19 @@ export function Test() {
     };
   }, []);
 
-  const titleFade = fadeRange(scrollProgress, 0.04, 0.17);
-  const solutionIn = fadeRange(scrollProgress, 0.19, 0.28);
-  const solutionOut = fadeRange(scrollProgress, 0.32, 0.44);
-  const zeroCostIn = fadeRange(scrollProgress, 0.44, 0.56);
-  const numberProgress = fadeRange(scrollProgress, 0.52, 0.72);
+  const titleFade = fadeRange(scrollProgress, titleFadeStart, titleFadeEnd);
+  const solutionIn = fadeRange(scrollProgress, 0.22, 0.37);
+  const solutionOut = fadeRange(scrollProgress, 0.48, 0.68);
+  const zeroCostIn = fadeRange(scrollProgress, 0.56, 0.70);
   const titleOpacity = 1 - titleFade;
   const solutionOpacity = solutionIn * (1 - solutionOut);
-  const zeroCostOut = fadeRange(scrollProgress, 0.9, 1);
+  const zeroCostOut = fadeRange(scrollProgress, finalFadeStart, finalFadeEnd);
   const zeroCostOpacity = zeroCostIn * (1 - zeroCostOut);
-  const statsIn = fadeRange(scrollProgress, 0.56, 0.66);
-  const statsOut = fadeRange(scrollProgress, 0.9, 1);
-  const statsOpacity = statsIn * (1 - statsOut);
-  const animatedValue = Math.round(1000 - 1000 * numberProgress);
+  const statsOut = fadeRange(scrollProgress, finalFadeStart, finalFadeEnd);
+  const statsOpacity = zeroCostIn * (1 - statsOut);
 
   return (
-    <section ref={sectionRef} id="test" className="relative min-h-[420vh] bg-white">
+    <section ref={sectionRef} id="test" className="relative min-h-[300vh] bg-white">
       <div className="sticky top-0 flex h-screen items-center">
         <div className="mx-auto w-full max-w-[1380px] px-5 md:px-8">
           <div className="relative mx-auto min-h-[16rem] max-w-5xl md:min-h-[18rem]">
@@ -126,7 +128,7 @@ export function Test() {
                 , we mean it.
               </h2>
               <p className="mt-8 text-7xl font-semibold leading-none tracking-tight text-[#2D865B] md:text-8xl lg:text-9xl">
-                ${animatedValue.toLocaleString("en-US")}
+                $0
               </p>
               <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600 md:text-2xl">
                 No capital investment. No project risk. We handle everything from start to finish

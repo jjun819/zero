@@ -27,7 +27,7 @@ const steps = [
   {
     n: "04",
     img: stepCharging,
-    title: "Go Live & Start Charging",
+    title: "Go Live & Start ChargingD",
     text: "Chargers go live, EV drivers pay per charging session, and the property owner receives 10% of monthly net profit.",
   },
 ];
@@ -36,14 +36,16 @@ const APPLY_HREF = "#apply";
 
 export function HowItWorks() {
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [visibleSteps, setVisibleSteps] = useState<boolean[]>(() => steps.map(() => false));
+  const [visibleSteps, setVisibleSteps] = useState<boolean[]>(
+    () => steps.map(() => false)
+  );
 
   const handleImagePointerMove = (event: PointerEvent<HTMLDivElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - bounds.left;
     const y = event.clientY - bounds.top;
-    const rotateY = (x / bounds.width - 0.5) * 8;
-    const rotateX = (0.5 - y / bounds.height) * 8;
+    const rotateY = ((x / bounds.width) - 0.5) * 8;
+    const rotateX = ((0.5 - y / bounds.height) * 8);
 
     event.currentTarget.style.setProperty("--tilt-x", `${rotateX}deg`);
     event.currentTarget.style.setProperty("--tilt-y", `${rotateY}deg`);
@@ -76,7 +78,7 @@ export function HowItWorks() {
       {
         rootMargin: "0px 0px -12% 0px",
         threshold: 0.35,
-      },
+      }
     );
 
     stepRefs.current.forEach((step) => {
@@ -87,10 +89,14 @@ export function HowItWorks() {
   }, []);
 
   return (
-    <section id="how-it-works" className="bg-white pb-20 pt-10 md:pb-28 md:pt-14">
+    <section id="how-it-works" className="bg-white py-20 md:py-28">
       <div className="mx-auto max-w-[1380px] px-5 md:px-8">
         <div className="mb-12 max-w-3xl">
-          <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-primary">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+            Four simple steps
+          </span>
+          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             From application to charging in four steps.
           </h2>
           <p className="mt-4 text-[1.1875rem] leading-relaxed text-foreground md:text-[1.375rem]">
@@ -139,11 +145,7 @@ export function HowItWorks() {
                 </div>
               );
               const content = (
-                <div
-                  className={`flex h-full flex-col justify-center ${
-                    index === 1 ? "md:-translate-y-4" : ""
-                  }`}
-                >
+                <div className="flex h-full flex-col justify-center">
                   <span className="text-sm font-semibold uppercase tracking-[0.14em] text-[#2D865B]">
                     Step {step.n}
                   </span>
@@ -173,7 +175,9 @@ export function HowItWorks() {
                   ) : null}
 
                   <div
-                    className={`md:order-1 ${imageFirst ? revealImageClass : revealContentClass}`}
+                    className={`md:order-1 ${
+                      imageFirst ? revealImageClass : revealContentClass
+                    }`}
                     style={{ transitionDelay: imageFirst ? "0ms" : "100ms" }}
                   >
                     {imageFirst ? image : content}
@@ -187,7 +191,9 @@ export function HowItWorks() {
                   </div>
 
                   <div
-                    className={`md:order-3 ${imageFirst ? revealContentClass : revealImageClass}`}
+                    className={`md:order-3 ${
+                      imageFirst ? revealContentClass : revealImageClass
+                    }`}
                     style={{ transitionDelay: imageFirst ? "100ms" : "0ms" }}
                   >
                     {imageFirst ? content : image}

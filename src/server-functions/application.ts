@@ -1,4 +1,4 @@
-import { SendEmailCommand, SESClient } from "@aws-sdk/client-ses";
+import { AwsClient } from "aws4fetch";
 import { createServerFn } from "@tanstack/react-start";
 
 import { applicationSchema, type ApplicationFormValues } from "@/lib/application-schema";
@@ -13,36 +13,100 @@ const getProcessEnv = (): ServerEnv => {
   return maybeProcess.process?.env ?? {};
 };
 
+const getWorkerEnv = (): ServerEnv => {
+  const maybeGlobal = globalThis as typeof globalThis & {
+    __CF_WORKER_ENV__?: ServerEnv;
+  };
+
+  return maybeGlobal.__CF_WORKER_ENV__ ?? {};
+};
+
+const getServerEnv = (): ServerEnv => ({
+  ...getWorkerEnv(),
+  ...getProcessEnv(),
+});
+
 const requiredEnv = (env: ServerEnv, key: string) => {
-  const value = env[key]?.trim();
+  const raw = env[key];
+  const value = typeof raw === "string" ? raw.trim() : "";
+
   if (!value) {
     throw new Error(`Missing required environment variable: ${key}`);
   }
+
   return value;
 };
 
-const createSesClient = (env: ServerEnv) => {
-  const accessKeyId = env.AWS_ACCESS_KEY_ID?.trim();
-  const secretAccessKey = env.AWS_SECRET_ACCESS_KEY?.trim();
+const sendSesEmail = async (env: ServerEnv, data: ApplicationFormValues) => {
+  const region = requiredEnv(env, "AWS_REGION");
+  const fromEmail = requiredEnv(env, "SES_FROM_EMAIL");
+  const toEmail = requiredEnv(env, "APPLICATION_TO_EMAIL");
+
+  const aws = new AwsClient({
+    accessKeyId: requiredEnv(env, "AWS_ACCESS_KEY_ID"),
+    secretAccessKey: requiredEnv(env, "AWS_SECRET_ACCESS_KEY"),
+    sessionToken: env.AWS_SESSION_TOKEN?.trim() || undefined,
+    service: "ses",
+    region,
+  });
 
   console.log("SES setup:", {
-    hasKey: Boolean(accessKeyId),
-    keyLength: accessKeyId?.length ?? 0,
-    hasSecret: Boolean(secretAccessKey),
-    secretLength: secretAccessKey?.length ?? 0,
-    region: env.AWS_REGION,
+    hasKey: Boolean(env.AWS_ACCESS_KEY_ID?.trim()),
+    keyLength: env.AWS_ACCESS_KEY_ID?.trim().length ?? 0,
+    hasSecret: Boolean(env.AWS_SECRET_ACCESS_KEY?.trim()),
+    secretLength: env.AWS_SECRET_ACCESS_KEY?.trim().length ?? 0,
+    region,
+    hasFromEmail: Boolean(fromEmail),
+    hasToEmail: Boolean(toEmail),
   });
 
-  return new SESClient({
-    region: requiredEnv(env, "AWS_REGION"),
-    credentials:
-      accessKeyId && secretAccessKey
-        ? {
-            accessKeyId,
-            secretAccessKey,
-          }
-        : undefined,
-  });
+  const response = await aws.fetch(
+    `https://email.${region}.amazonaws.com/v2/email/outbound-emails`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        FromEmailAddress: fromEmail,
+        Destination: {
+          ToAddresses: [toEmail],
+        },
+        ReplyToAddresses: [data.email],
+        Content: {
+          Simple: {
+            Subject: {
+              Charset: "UTF-8",
+              Data: `New EV charger application from ${data.firstName} ${data.lastName}`,
+            },
+            Body: {
+              Text: {
+                Charset: "UTF-8",
+                Data: formatTextEmail(data),
+              },
+              Html: {
+                Charset: "UTF-8",
+                Data: formatHtmlEmail(data),
+              },
+            },
+          },
+        },
+      }),
+    },
+  );
+
+  const body = await response.text();
+
+  if (!response.ok) {
+    console.error("SES SendEmail failed:", {
+      status: response.status,
+      body,
+    });
+
+    throw new Error(`SES SendEmail failed: ${response.status} ${body}`);
+  }
+
+  console.log("SES SendEmail succeeded:", body);
 };
 
 const escapeHtml = (value: string) =>
@@ -101,36 +165,9 @@ const formatHtmlEmail = (data: ApplicationFormValues) => `
 export const submitApplication = createServerFn({ method: "POST" })
   .inputValidator(applicationSchema)
   .handler(async ({ data }) => {
-    const env = getProcessEnv();
-    const fromEmail = requiredEnv(env, "SES_FROM_EMAIL");
-    const toEmail = requiredEnv(env, "APPLICATION_TO_EMAIL");
-    const ses = createSesClient(env);
-    console.log(fromEmail);
-    await ses.send(
-      new SendEmailCommand({
-        Source: fromEmail,
-        Destination: {
-          ToAddresses: [toEmail],
-        },
-        ReplyToAddresses: [data.email],
-        Message: {
-          Subject: {
-            Charset: "UTF-8",
-            Data: `New EV charger application from ${data.firstName} ${data.lastName}`,
-          },
-          Body: {
-            Text: {
-              Charset: "UTF-8",
-              Data: formatTextEmail(data),
-            },
-            Html: {
-              Charset: "UTF-8",
-              Data: formatHtmlEmail(data),
-            },
-          },
-        },
-      }),
-    );
+  const env = getServerEnv();
 
-    return { ok: true };
-  });
+  await sendSesEmail(env, data);
+
+  return { ok: true };
+});

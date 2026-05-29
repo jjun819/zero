@@ -3,6 +3,13 @@ import "./lib/error-capture";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 
+type WorkerEnv = Record<string, string | undefined>;
+
+declare global {
+  // eslint-disable-next-line no-var
+  var __CF_WORKER_ENV__: WorkerEnv | undefined;
+}
+
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };

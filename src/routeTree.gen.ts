@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DebugRouteImport } from './routes/debug'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsL3FastDcEvChargerRouteImport } from './routes/products/l3-fast-dc-ev-charger'
 import { Route as ProductsL2EvChargerRouteImport } from './routes/products/l2-ev-charger'
 
+const DebugRoute = DebugRouteImport.update({
+  id: '/debug',
+  path: '/debug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -32,40 +38,60 @@ const ProductsL2EvChargerRoute = ProductsL2EvChargerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/debug': typeof DebugRoute
   '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
   '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/debug': typeof DebugRoute
   '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
   '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/debug': typeof DebugRoute
   '/products/l2-ev-charger': typeof ProductsL2EvChargerRoute
   '/products/l3-fast-dc-ev-charger': typeof ProductsL3FastDcEvChargerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/products/l2-ev-charger' | '/products/l3-fast-dc-ev-charger'
+  fullPaths:
+    | '/'
+    | '/debug'
+    | '/products/l2-ev-charger'
+    | '/products/l3-fast-dc-ev-charger'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/products/l2-ev-charger' | '/products/l3-fast-dc-ev-charger'
+  to:
+    | '/'
+    | '/debug'
+    | '/products/l2-ev-charger'
+    | '/products/l3-fast-dc-ev-charger'
   id:
     | '__root__'
     | '/'
+    | '/debug'
     | '/products/l2-ev-charger'
     | '/products/l3-fast-dc-ev-charger'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DebugRoute: typeof DebugRoute
   ProductsL2EvChargerRoute: typeof ProductsL2EvChargerRoute
   ProductsL3FastDcEvChargerRoute: typeof ProductsL3FastDcEvChargerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/debug': {
+      id: '/debug'
+      path: '/debug'
+      fullPath: '/debug'
+      preLoaderRoute: typeof DebugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -92,6 +118,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DebugRoute: DebugRoute,
   ProductsL2EvChargerRoute: ProductsL2EvChargerRoute,
   ProductsL3FastDcEvChargerRoute: ProductsL3FastDcEvChargerRoute,
 }

@@ -12,7 +12,7 @@ const PRODUCTS = {
     href: "/products/l2-ev-charger",
     description:
       "Ideal for residential, commercial, and workplace charging. 8-12 hour sessions, perfect for overnight or workday parking.",
-    specs: ["7.7 kW output", "OCPP 1.6 compatible", "Networked + local billing"],
+    specs: ["Max 7.7kWh output", "OCPP 1.6 compatible", "Networked + local billing"],
   },
   l3: {
     badge: "L3",
@@ -23,7 +23,7 @@ const PRODUCTS = {
     href: "/products/l3-fast-dc-ev-charger",
     description:
       "High-speed charging for public and high-traffic locations. 20-45 minute sessions, ideal for retail plazas and highway corridors.",
-    specs: ["180 kW output", "CCS + CHAdeMO connectors", "Premium revenue per session"],
+    specs: ["Max 400kWh output", "CCS + CHAdeMO connectors", "Premium revenue per session"],
   },
 };
 

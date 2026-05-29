@@ -98,7 +98,7 @@ export function Test() {
                 willChange: "opacity, transform",
               }}
             >
-              BC requires 90% of new vehicles to be zero emission by 2030.
+              BC requires 75% of new vehicles to be zero emission by 2035.
             </h2>
 
             <h2

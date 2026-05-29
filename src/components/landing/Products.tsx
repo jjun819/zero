@@ -23,7 +23,7 @@ const PRODUCTS = {
     href: "/products/l3-fast-dc-ev-charger",
     description:
       "High-speed charging for public and high-traffic locations. 20-45 minute sessions, ideal for retail plazas and highway corridors.",
-    specs: ["Max 400kWh output", "CCS + CHAdeMO connectors", "Premium revenue per session"],
+    specs: ["Max 400kWh output", "CCS + CHAdeMO connectors", "CCS1 and NACS supported"],
   },
 };
 

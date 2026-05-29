@@ -30,7 +30,7 @@ const goToApplicationForm = (event: MouseEvent<HTMLAnchorElement>) => {
 const goToHomeTop = (event: MouseEvent<HTMLAnchorElement>) => {
   event.preventDefault();
 
-  if (window.location.pathname === "/" && !window.location.search) {
+  if (window.location.pathname === "/" && !window.location.search && !window.location.hash) {
     window.location.reload();
     return;
   }

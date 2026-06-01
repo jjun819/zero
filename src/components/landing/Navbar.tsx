@@ -15,9 +15,11 @@ const productLinks = [
 
 const serviceLinks = [{ href: "https://foreseeson-evse.com/", label: "Installation" }];
 
+const ZERO_COST_HREF = "/zero-cost-brochure.html";
+
 const zeroCostLinks = [
-  { href: "/ubiqbrochure.pdf", label: "Residential" },
-  { href: "/ubiqbrochure.pdf", label: "Commercial" },
+  { href: ZERO_COST_HREF, label: "Residential" },
+  { href: ZERO_COST_HREF, label: "Commercial" },
 ];
 
 const APPLY_HREF = "/#apply";

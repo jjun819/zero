@@ -15,11 +15,7 @@ const productLinks = [
 
 const serviceLinks = [{ href: "https://foreseeson-evse.com/", label: "Installation" }];
 
-const ZERO_COST_HREF = "/zero-cost-brochure.html";
-
-const zeroCostLinks = [
-  { href: ZERO_COST_HREF, label: "Commercial" },
-];
+const ZERO_COST_HREF = "/ubiq_broch.html";
 
 const APPLY_HREF = "/#apply";
 
@@ -215,33 +211,12 @@ export function Navbar() {
                 }`}
               >
                 <div className="rounded-xl border border-border bg-background p-3 shadow-xl">
-                  <div className="group/zero relative">
-                    <a
-                      href="#solutions"
-                      className="flex items-center justify-between gap-4 rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary group-hover/zero:bg-secondary group-hover/zero:text-primary"
-                    >
-                      Zero Cost
-                      <ChevronRight className="h-4 w-4" />
-                    </a>
-
-                    <div className="invisible absolute left-full top-0 w-64 pl-3 opacity-0 transition-all duration-150 group-hover/zero:visible group-hover/zero:opacity-100 group-focus-within/zero:visible group-focus-within/zero:opacity-100">
-                      <div className="rounded-xl border border-border bg-background p-3 shadow-xl">
-                        <div className="grid gap-1">
-                          {zeroCostLinks.map((l) => (
-                            <a
-                              key={l.label}
-                              href={l.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
-                            >
-                              {l.label}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <a
+                    href={ZERO_COST_HREF}
+                    className="block rounded-lg px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
+                  >
+                    Zero Cost
+                  </a>
                 </div>
               </div>
             </div>
@@ -349,24 +324,12 @@ export function Navbar() {
               </a>
               <div className="ml-3 grid gap-1 border-l border-border pl-3">
                 <a
-                  href="#solutions"
+                  href={ZERO_COST_HREF}
                   onClick={() => setOpen(false)}
                   className="rounded-md px-2 py-2 text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-primary"
                 >
                   Zero Cost
                 </a>
-                <div className="ml-3 grid gap-1 border-l border-border pl-3">
-                  {zeroCostLinks.map((l) => (
-                    <a
-                      key={l.label}
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className="rounded-md px-2 py-2 text-sm font-medium text-foreground/60 hover:bg-secondary hover:text-primary"
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                </div>
               </div>
               <a
                 href={APPLY_HREF}

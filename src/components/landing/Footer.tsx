@@ -11,10 +11,7 @@ const productLinks = [
 
 const serviceLinks = [{ href: "https://foreseeson-evse.com/", label: "Installation" }];
 
-const zeroCostLinks = [
-  { href: "#solutions", label: "Residential" },
-  { href: "#solutions", label: "Commercial" },
-];
+const ZERO_COST_HREF = "/ubiq_broch.html";
 
 const footerHeadingClass = "text-sm font-bold uppercase tracking-[0.18em] text-white";
 const footerLinkClass = "font-medium text-[#A7B0B2] transition-colors hover:text-[#20B2AA]";
@@ -89,14 +86,11 @@ export function Footer() {
           <div className="md:col-span-2">
             <h4 className={footerHeadingClass}>Solutions</h4>
             <ul className="mt-4 space-y-3 text-sm">
-              <li className="font-semibold text-white">Zero Cost</li>
-              {zeroCostLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className={footerLinkClass}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a href={ZERO_COST_HREF} className={footerParentLinkClass}>
+                  Zero Cost
+                </a>
+              </li>
             </ul>
           </div>
 

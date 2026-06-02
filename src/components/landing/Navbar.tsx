@@ -18,7 +18,6 @@ const serviceLinks = [{ href: "https://foreseeson-evse.com/", label: "Installati
 const ZERO_COST_HREF = "/zero-cost-brochure.html";
 
 const zeroCostLinks = [
-  { href: ZERO_COST_HREF, label: "Residential" },
   { href: ZERO_COST_HREF, label: "Commercial" },
 ];
 

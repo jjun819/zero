@@ -86,8 +86,8 @@ export function Test() {
   const statsOpacity = zeroCostIn * (1 - statsOut);
 
   return (
-    <section ref={sectionRef} id="test" className="relative min-h-[300vh] bg-white">
-      <div className="sticky top-0 flex h-screen items-center">
+    <section ref={sectionRef} id="test" className="relative bg-white md:min-h-[300vh]">
+      <div className="hidden md:flex md:sticky md:top-0 md:h-screen md:items-center">
         <div className="mx-auto w-full max-w-[1380px] px-5 md:px-8">
           <div className="relative mx-auto min-h-[16rem] max-w-5xl md:min-h-[18rem]">
             <h2
@@ -156,6 +156,45 @@ export function Test() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile: static, no scroll-jacking. Desktop layout above is untouched. */}
+      <div className="md:hidden px-5 py-16">
+        <div className="mx-auto max-w-xl space-y-14">
+          <h2 className="text-center text-3xl font-semibold leading-tight text-slate-950">
+            BC requires 90% of new vehicles to be zero emission by 2030.
+          </h2>
+
+          <div className="text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#2D865B]">
+              Here is our solution
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold leading-tight text-slate-950">
+              When we say{" "}
+              <span className="inline" style={gradientTextStyle}>
+                Zero Cost
+              </span>
+              , we mean it.
+            </h2>
+            <p className="mt-6 text-7xl font-semibold leading-none tracking-tight text-[#2D865B]">
+              $0
+            </p>
+            <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-slate-600">
+              No capital investment. No project risk. We handle everything from start to finish.
+            </p>
+          </div>
+
+          <div className="grid gap-6">
+            {stats.map((stat) => (
+              <div key={stat.label} className="border-l-2 border-[#2D865B] pl-5">
+                <p className="text-5xl font-semibold leading-none tracking-tight text-slate-950">
+                  {stat.value}
+                </p>
+                <p className="mt-3 text-base leading-relaxed text-[#56617D]">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

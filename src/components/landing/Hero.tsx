@@ -16,7 +16,10 @@ export function Hero() {
         backgroundImage: `url(${heroBackground})`,
       }}
     >
-      <div className="mx-auto flex min-h-[90vh] max-w-7xl items-center px-5 py-24 md:px-8 md:py-28">
+      {/* Mobile-only readability scrim so the dark headline doesn't sit on the dark charger image */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[62%] bg-gradient-to-b from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent md:hidden" />
+
+      <div className="relative mx-auto flex min-h-[90vh] max-w-7xl items-start px-5 py-20 md:items-center md:px-8 md:py-28">
         <div className="max-w-3xl">
           <h1
             className={`max-w-[44rem] text-[2.25rem] font-semibold leading-[1.1] tracking-tight text-slate-950 transition-all duration-1000 md:text-[3.25rem] lg:text-[4.3rem] ${

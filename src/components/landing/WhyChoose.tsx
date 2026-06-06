@@ -42,7 +42,7 @@ export function WhyChoose() {
         </div>
 
         <div className="mt-14">
-          <div className="relative min-h-[520px] overflow-hidden rounded-xl border border-white/60 bg-white/45 backdrop-blur-xl">
+          <div className="relative min-h-[260px] overflow-hidden rounded-xl border border-white/60 bg-white/45 backdrop-blur-xl md:min-h-[520px]">
             <img
               src={parkingLotImage}
               alt="Parking spaces prepared for EV charging"
